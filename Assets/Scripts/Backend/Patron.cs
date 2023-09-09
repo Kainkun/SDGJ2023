@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Patron
+public class Patron : MonoBehaviour
 {
     public int Patience;
     public float Chaos;
@@ -25,22 +25,7 @@ public class Patron
                             Random.Range(0, 100))
     { }
 
-    public void Tick()
-    {
-        CalcChaosEvent();
-        CalcDuration();
-    }
-    private void CalcDuration() {
-        //some math bullshit
-    }
-
-    private void CalcChaosEvent()
-    {
-
-        float chaosThresh = Random.Range(0, 1);
-        
-        
-        
-        //some math bullshit
+    public void Tick() {
+        Duration -= 1;
     }
 }

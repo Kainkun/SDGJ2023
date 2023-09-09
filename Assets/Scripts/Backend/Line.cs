@@ -1,6 +1,6 @@
-﻿public class Line {
+﻿using UnityEngine;
 
-
+public class Line : MonoBehaviour{
     public Patron Front
     {
         get

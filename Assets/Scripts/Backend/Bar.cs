@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Bar
+public class Bar : MonoBehaviour
 {
     public int Energy, MaxEnergy, MinEnergy;
     public int MaxPeople, MinPeople;
@@ -17,7 +17,9 @@ public class Bar
     //begin function prototypes
     public UnityEvent OnGameOver;
     public UnityEvent OnTick;
+    public UnityEvent OnChaoticEvent;
 
+    //Tick is a unit of time
     private void Tick() {
         //TODO :: What needs to be done in tick
         CheckEnergyHeat();
@@ -39,6 +41,10 @@ public class Bar
             EnergyHeat -= Math.Max(0, EnergyHeat - 1);
     }
 
+    private void ChaoticEvent() {
+        OnChaoticEvent.Invoke();
+    }
+
     private void GameOver(){
         OnGameOver.Invoke();
     }
@@ -47,6 +53,12 @@ public class Bar
         Patrons.Add(p);
         p.BarRef = this;
         OnTick.AddListener(p.Tick);
+
+        float chaosThresh = 1 - ((float)(Energy + p.Energy) / (float)MaxEnergy);
+        if (p.Chaos > chaosThresh) {
+            ChaoticEvent();
+        }
+
         Energy += p.Energy;
     }
 
@@ -54,6 +66,12 @@ public class Bar
         Patrons.Remove(p);
         p.BarRef = null;
         OnTick.RemoveListener(p.Tick);
+        
+        float chaosThresh = 1 - ((float)(Energy + p.Energy) / (float)MaxEnergy);
+        if (p.Chaos > chaosThresh) {
+            ChaoticEvent();
+        }
+        
         Energy -= p.Energy;
     }
 }
