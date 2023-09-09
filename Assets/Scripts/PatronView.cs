@@ -6,24 +6,24 @@ using UnityEngine;
 
 public class PatronView
 {
-    private static CharacterSpriteData[] characterDatas;
+    private static PatronSpriteData[] patronDatas;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     static void Init()
     {
-        characterDatas = Resources.LoadAll<CharacterSpriteData>("SpriteData");
+        patronDatas = Resources.LoadAll<PatronSpriteData>("SpriteData");
     }
 
     [MenuItem("Tests/Create Many Patrons")]
     public static void CreateMany()
     {
-        for (int i = 0; i < characterDatas.Length; i++)
+        for (int i = 0; i < patronDatas.Length; i++)
         {
             for (int x = 0; x < 15; x++)
             {
                 for (int y = 0; y < 15; y++)
                 {
-                    CharacterSpriteData data = characterDatas[i];
+                    PatronSpriteData data = patronDatas[i];
                     GameObject o = CreatePatron(data);
                     o.transform.position = new Vector3((x * 2) + (i * 2 * 15), y * 2, 0);
                 }
@@ -34,50 +34,42 @@ public class PatronView
     [MenuItem("Tests/Create Random Patron")]
     public static GameObject CreateRandomPatron()
     {
-        return CreatePatron(characterDatas[Random.Range(0, characterDatas.Length)]);
+        return CreatePatron(patronDatas[Random.Range(0, patronDatas.Length)]);
     }
 
-    public static GameObject CreatePatron(CharacterSpriteData characterData)
+    public static GameObject CreatePatron(PatronSpriteData patronData)
     {
-        GameObject characterObject = Object.Instantiate(characterData.psb);
-        characterObject.transform.localScale = Vector2.one * 0.1f;
+        GameObject patronObject = Object.Instantiate(patronData.psb);
+        patronObject.transform.localScale = Vector2.one * 0.1f;
 
         List<Color> pickedColors = new List<Color>();
 
         Transform t;
-        t = characterObject.transform.Find("b1");
+        t = patronObject.transform.Find("b1");
         if (t)
         {
-            Color color = characterData.b1.Evaluate(Random.Range(0f, 1f));
+            Color color = patronData.b1.Evaluate(Random.Range(0f, 1f));
             pickedColors.Add(color);
             t.GetComponent<SpriteRenderer>().color = color;
         }
 
-        t = characterObject.transform.Find("b2");
+        t = patronObject.transform.Find("b2");
         if (t)
         {
-            Color color = characterData.b2.Evaluate(Random.Range(0f, 1f));
+            Color color = patronData.b2.Evaluate(Random.Range(0f, 1f));
             pickedColors.Add(color);
             t.GetComponent<SpriteRenderer>().color = color;
         }
 
-        t = characterObject.transform.Find("b3");
+        t = patronObject.transform.Find("b3");
         if (t)
         {
-            Color color = characterData.b3.Evaluate(Random.Range(0f, 1f));
+            Color color = patronData.b3.Evaluate(Random.Range(0f, 1f));
             pickedColors.Add(color);
             t.GetComponent<SpriteRenderer>().color = color;
         }
 
-        t = characterObject.transform.Find("c1");
-        if (t)
-        {
-            Color color = Random.ColorHSV(0f, 1f, 0.2f, 0.8f, 0.2f, 0.9f);
-            pickedColors.Add(color);
-            t.GetComponent<SpriteRenderer>().color = color;
-        }
-
-        t = characterObject.transform.Find("c2");
+        t = patronObject.transform.Find("c1");
         if (t)
         {
             Color color = Random.ColorHSV(0f, 1f, 0.2f, 0.8f, 0.2f, 0.9f);
@@ -85,7 +77,7 @@ public class PatronView
             t.GetComponent<SpriteRenderer>().color = color;
         }
 
-        t = characterObject.transform.Find("c3");
+        t = patronObject.transform.Find("c2");
         if (t)
         {
             Color color = Random.ColorHSV(0f, 1f, 0.2f, 0.8f, 0.2f, 0.9f);
@@ -93,6 +85,14 @@ public class PatronView
             t.GetComponent<SpriteRenderer>().color = color;
         }
 
-        return characterObject;
+        t = patronObject.transform.Find("c3");
+        if (t)
+        {
+            Color color = Random.ColorHSV(0f, 1f, 0.2f, 0.8f, 0.2f, 0.9f);
+            pickedColors.Add(color);
+            t.GetComponent<SpriteRenderer>().color = color;
+        }
+
+        return patronObject;
     }
 }
