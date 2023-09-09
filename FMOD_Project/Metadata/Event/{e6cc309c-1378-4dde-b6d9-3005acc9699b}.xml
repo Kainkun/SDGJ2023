@@ -33,7 +33,6 @@
 		</relationship>
 		<relationship name="parameters">
 			<destination>{97445998-5883-49f2-affd-1175aa8a74ee}</destination>
-			<destination>{94b08de5-d951-46bc-8d54-57adf17f4eae}</destination>
 		</relationship>
 		<relationship name="banks">
 			<destination>{090d1234-ffcf-42a5-aec8-6137f8372c3b}</destination>
@@ -81,11 +80,6 @@
 	<object class="ActionSheet" id="{97445998-5883-49f2-affd-1175aa8a74ee}">
 		<relationship name="modules">
 			<destination>{9f7a24b5-b5d2-4a32-817d-0679c90276fd}</destination>
-		</relationship>
-	</object>
-	<object class="ParameterProxy" id="{94b08de5-d951-46bc-8d54-57adf17f4eae}">
-		<relationship name="preset">
-			<destination>{cd75045f-73a9-40b3-95a8-fb7c91dfa1f1}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{fe818821-25cf-495f-91bf-57de5299b6b6}">
@@ -158,34 +152,6 @@
 		<property name="nameOfPropertyBeingAutomated">
 			<value>pitch</value>
 		</property>
-		<relationship name="automationCurves">
-			<destination>{5283b814-eb5c-45da-a362-e0acbc54e1de}</destination>
-		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{4e6112fc-97ff-41cd-8d32-add3fe15f265}" />
-	<object class="AutomationCurve" id="{5283b814-eb5c-45da-a362-e0acbc54e1de}">
-		<relationship name="parameter">
-			<destination>{cd75045f-73a9-40b3-95a8-fb7c91dfa1f1}</destination>
-		</relationship>
-		<relationship name="automationPoints">
-			<destination>{21d200c2-1d19-4d43-b28a-3bd4a0b17f2e}</destination>
-			<destination>{d2c959d4-1b75-484f-b86e-50861bb898d1}</destination>
-		</relationship>
-	</object>
-	<object class="AutomationPoint" id="{21d200c2-1d19-4d43-b28a-3bd4a0b17f2e}">
-		<property name="position">
-			<value>0.99259259259259258</value>
-		</property>
-		<property name="value">
-			<value>24</value>
-		</property>
-	</object>
-	<object class="AutomationPoint" id="{d2c959d4-1b75-484f-b86e-50861bb898d1}">
-		<property name="position">
-			<value>0</value>
-		</property>
-		<property name="value">
-			<value>0</value>
-		</property>
-	</object>
 </objects>
