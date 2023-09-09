@@ -14,9 +14,9 @@ public class BounceAnimation : MonoBehaviour
         MusicBeatSystem.Instance.OnBeatActions.Add(new MusicBeatSystem.BeatAction(Bounce, -0.125f));
     }
 
-    private void Bounce() => StartCoroutine(E_Bounce());
+    private void Bounce() => StartCoroutine(CR_Bounce());
 
-    IEnumerator E_Bounce()
+    IEnumerator CR_Bounce()
     {
         float t = 0;
 

@@ -47,9 +47,9 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
-    public void MoveToWaitPosition() => StartCoroutine(E_MoveToWaitPosition());
+    public void MoveToWaitPosition() => StartCoroutine(CR_MoveToWaitPosition());
 
-    IEnumerator E_MoveToWaitPosition()
+    IEnumerator CR_MoveToWaitPosition()
     {
         if (state is not State.BeforeAppear)
         {
@@ -78,9 +78,9 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
-    public void MoveToLeave() => StartCoroutine(E_MoveToLeave());
+    public void MoveToLeave() => StartCoroutine(CR_MoveToLeave());
 
-    IEnumerator E_MoveToLeave()
+    IEnumerator CR_MoveToLeave()
     {
         if (state is not (State.MovingToWaitPosition or State.Waiting))
         {
@@ -111,9 +111,9 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
-    public void MoveToEnter() => StartCoroutine(E_MoveToEnter());
+    public void MoveToEnter() => StartCoroutine(CR_MoveToEnter());
 
-    IEnumerator E_MoveToEnter()
+    IEnumerator CR_MoveToEnter()
     {
         if (state is not (State.MovingToWaitPosition or State.Waiting))
         {

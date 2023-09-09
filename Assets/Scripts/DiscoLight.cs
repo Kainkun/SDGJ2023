@@ -33,9 +33,9 @@ public class DiscoLight : MonoBehaviour
         light2D.intensity = startingIntensity * multiplier;
     }
 
-    private void Pulse() => StartCoroutine(E_Pulse());
+    private void Pulse() => StartCoroutine(CR_Pulse());
 
-    IEnumerator E_Pulse()
+    IEnumerator CR_Pulse()
     {
         float t = 0;
         while (t < beatPulse.keys[beatPulse.length - 1].time)
