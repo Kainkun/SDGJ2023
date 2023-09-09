@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class CharacterAnimator : MonoBehaviour
 {
-    public GameObject sprite;
-
     private float distanceToWaitPosition = 2;
     private float distanceToEnterPosition = 4.5f;
     private Vector2 waitPosition = new Vector2(-1.5f, -1.93f);
@@ -33,24 +31,15 @@ public class CharacterAnimator : MonoBehaviour
         Disappeared
     }
 
-    void Awake()
-    {
-        sprite.SetActive(false);
-        state = State.BeforeAppear;
-        stepDistance = data.stepCurve.keys[data.stepCurve.length - 1].time;
-        stepRemainder = distanceToWaitPosition % stepDistance;
-    }
-
-    private void Start()
-    {
-        MoveToWaitPosition();
-    }
-
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
     public void MoveToWaitPosition() => StartCoroutine(CR_MoveToWaitPosition());
 
     IEnumerator CR_MoveToWaitPosition()
     {
+        state = State.BeforeAppear;
+        stepDistance = data.stepCurve.keys[data.stepCurve.length - 1].time;
+        stepRemainder = distanceToWaitPosition % stepDistance;
+        
         if (state is not State.BeforeAppear)
         {
             Debug.LogWarning("CharacterAnimator is not in a valid state to move to wait position.");
@@ -58,8 +47,6 @@ public class CharacterAnimator : MonoBehaviour
         }
 
         state = State.MovingToWaitPosition;
-
-        sprite.SetActive(true);
 
         Vector2 startPosition = waitPosition + Vector2.left * distanceToWaitPosition;
         transform.position = startPosition;
@@ -103,7 +90,6 @@ public class CharacterAnimator : MonoBehaviour
             yield return null;
         }
 
-        sprite.SetActive(false);
         state = State.Disappeared;
         onDisappear?.Invoke();
 
@@ -136,7 +122,6 @@ public class CharacterAnimator : MonoBehaviour
             yield return null;
         }
 
-        sprite.SetActive(false);
         state = State.Disappeared;
         onDisappear?.Invoke();
 
