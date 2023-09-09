@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using EasyButtons;
+using FMODUnity;
 using UnityEngine;
 
 public class MusicBeatSystem : MonoBehaviour
@@ -23,7 +25,7 @@ public class MusicBeatSystem : MonoBehaviour
         }
     }
 
-    private float startTime = 1f;
+    private float startTime = float.PositiveInfinity;
     private float beatInterval;
 
     public static MusicBeatSystem Instance { get; private set; }
@@ -41,7 +43,14 @@ public class MusicBeatSystem : MonoBehaviour
 
     private void Start()
     {
-        beatInterval = 0.7f;
+        beatInterval = 60f / 112f;
+    }
+    
+    [Button(Mode = ButtonMode.EnabledInPlayMode)]
+    public void StartMusic()
+    {
+        startTime = Time.time;
+        GetComponent<StudioEventEmitter>().Play();
     }
 
     private void Update()
