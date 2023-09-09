@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 2327639679768889733}
   data: {fileID: 11400000, guid: 134d77b09c4bb3749a6676091d5d23d5, type: 2}
+  state: 0
 --- !u!1 &2327639679768889733
 GameObject:
   m_ObjectHideFlags: 0
