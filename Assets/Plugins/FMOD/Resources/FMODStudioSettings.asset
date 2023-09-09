@@ -292,8 +292,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: Assets/Plugins/FMOD/Project/Frog_Bouncer_Game/Frog_Bouncer_Game.fspro
-  sourceBankPath: Assets/Plugins/FMOD/Project/Frog_Bouncer_Game/Build
+  sourceProjectPath: FMOD_Project/FMOD_Project.fspro
+  sourceBankPath: FMOD_Project/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
