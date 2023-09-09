@@ -17,7 +17,7 @@ public class LineView : MonoBehaviour
     private CharacterAnimator CreatePatron()
     {
         GameObject patron = new GameObject("Patron");
-        GameObject sprite = PatronView.CreateRandomPatron();
+        GameObject sprite = PatronSpriteCreator.CreateRandomPatron();
         sprite.transform.parent = patron.transform;
         CharacterAnimator characterAnimator = patron.AddComponent<CharacterAnimator>();
         characterAnimator.data = patronAnimatorDatas[Random.Range(0, patronAnimatorDatas.Length)];

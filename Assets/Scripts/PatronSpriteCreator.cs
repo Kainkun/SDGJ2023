@@ -4,7 +4,7 @@ using EasyButtons;
 using UnityEditor;
 using UnityEngine;
 
-public class PatronView
+public class PatronSpriteCreator
 {
     private static PatronSpriteData[] patronDatas;
 
@@ -44,13 +44,20 @@ public class PatronView
 
         List<Color> pickedColors = new List<Color>();
 
+        foreach (var sr in patronObject.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sr.sortingLayerName = "Character";
+        }
+
         Transform t;
         t = patronObject.transform.Find("b1");
         if (t)
         {
             Color color = patronData.b1.Evaluate(Random.Range(0f, 1f));
             pickedColors.Add(color);
-            t.GetComponent<SpriteRenderer>().color = color;
+            SpriteRenderer sr = t.GetComponent<SpriteRenderer>();
+            sr.sortingLayerName = "Character";
+            sr.color = color;
         }
 
         t = patronObject.transform.Find("b2");
@@ -58,7 +65,9 @@ public class PatronView
         {
             Color color = patronData.b2.Evaluate(Random.Range(0f, 1f));
             pickedColors.Add(color);
-            t.GetComponent<SpriteRenderer>().color = color;
+            SpriteRenderer sr = t.GetComponent<SpriteRenderer>();
+            sr.sortingLayerName = "Character";
+            sr.color = color;
         }
 
         t = patronObject.transform.Find("b3");
@@ -66,7 +75,9 @@ public class PatronView
         {
             Color color = patronData.b3.Evaluate(Random.Range(0f, 1f));
             pickedColors.Add(color);
-            t.GetComponent<SpriteRenderer>().color = color;
+            SpriteRenderer sr = t.GetComponent<SpriteRenderer>();
+            sr.sortingLayerName = "Character";
+            sr.color = color;
         }
 
         t = patronObject.transform.Find("c1");
@@ -74,7 +85,9 @@ public class PatronView
         {
             Color color = Random.ColorHSV(0f, 1f, 0.2f, 0.8f, 0.2f, 0.9f);
             pickedColors.Add(color);
-            t.GetComponent<SpriteRenderer>().color = color;
+            SpriteRenderer sr = t.GetComponent<SpriteRenderer>();
+            sr.sortingLayerName = "Character";
+            sr.color = color;
         }
 
         t = patronObject.transform.Find("c2");
@@ -82,7 +95,9 @@ public class PatronView
         {
             Color color = Random.ColorHSV(0f, 1f, 0.2f, 0.8f, 0.2f, 0.9f);
             pickedColors.Add(color);
-            t.GetComponent<SpriteRenderer>().color = color;
+            SpriteRenderer sr = t.GetComponent<SpriteRenderer>();
+            sr.sortingLayerName = "Character";
+            sr.color = color;
         }
 
         t = patronObject.transform.Find("c3");
@@ -90,7 +105,9 @@ public class PatronView
         {
             Color color = Random.ColorHSV(0f, 1f, 0.2f, 0.8f, 0.2f, 0.9f);
             pickedColors.Add(color);
-            t.GetComponent<SpriteRenderer>().color = color;
+            SpriteRenderer sr = t.GetComponent<SpriteRenderer>();
+            sr.sortingLayerName = "Character";
+            sr.color = color;
         }
 
         return patronObject;
