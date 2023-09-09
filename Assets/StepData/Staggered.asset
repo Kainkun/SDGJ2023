@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9354070a75ab9a488a98a073e76d9c8, type: 3}
+  m_Name: Staggered
+  m_EditorClassIdentifier: 
+  stepCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.013244159
+      outSlope: -0.013244159
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.242575
+    - serializedVersion: 3
+      time: 0.333376
+      value: 0.25
+      inSlope: -0.006059921
+      outSlope: -0.006059921
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.37901014
+      outWeight: 0.4747178
+    - serializedVersion: 3
+      time: 0.42325997
+      value: 0.16162705
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.5711122
+      outWeight: 0.48215577
+    - serializedVersion: 3
+      time: 0.47793558
+      value: 0.16062705
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.2304495
+      outWeight: 0.46226183
+    - serializedVersion: 3
+      time: 0.64635825
+      value: 0
+      inSlope: 0.016816942
+      outSlope: 0.016816942
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.53115135
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 4
+  smoothTime: 0.2
+  maxSpeed: 0.5
