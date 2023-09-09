@@ -10,7 +10,7 @@ public class CharacterAnimator : MonoBehaviour
 
     private float distanceToWaitPosition = 2;
     private float distanceToEnterPosition = 4.5f;
-    private Vector2 waitPosition = new Vector2(-1.5f, 0f);
+    private Vector2 waitPosition = new Vector2(-1.5f, -1.93f);
     private float velocity;
 
     private float stepDistance;
@@ -47,7 +47,7 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
-    private void MoveToWaitPosition() => StartCoroutine(E_MoveToWaitPosition());
+    public void MoveToWaitPosition() => StartCoroutine(E_MoveToWaitPosition());
 
     IEnumerator E_MoveToWaitPosition()
     {
@@ -78,7 +78,7 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
-    private void MoveToLeave() => StartCoroutine(E_MoveToLeave());
+    public void MoveToLeave() => StartCoroutine(E_MoveToLeave());
 
     IEnumerator E_MoveToLeave()
     {
@@ -111,7 +111,7 @@ public class CharacterAnimator : MonoBehaviour
     }
 
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
-    private void MoveToEnter() => StartCoroutine(E_MoveToEnter());
+    public void MoveToEnter() => StartCoroutine(E_MoveToEnter());
 
     IEnumerator E_MoveToEnter()
     {
