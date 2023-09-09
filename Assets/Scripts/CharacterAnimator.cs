@@ -10,6 +10,7 @@ public class CharacterAnimator : MonoBehaviour
     public GameObject sprite;
 
     private float distanceToWaitPosition = 2;
+    private float distanceToEnterPosition = 4.5f;
     private Vector2 waitPosition = new Vector2(-1.5f, 0f);
     private float velocity;
 
@@ -51,7 +52,11 @@ public class CharacterAnimator : MonoBehaviour
 
     IEnumerator E_MoveToWaitPosition()
     {
-        Assert.IsTrue(state == State.BeforeAppear);
+        if (state is not State.BeforeAppear)
+        {
+            Debug.LogWarning("CharacterAnimator is not in a valid state to move to wait position.");
+            yield break;
+        }
 
         state = State.MovingToWaitPosition;
 
@@ -78,7 +83,11 @@ public class CharacterAnimator : MonoBehaviour
 
     IEnumerator E_MoveToLeave()
     {
-        Assert.IsTrue(state is State.MovingToWaitPosition or State.Waiting);
+        if (state is not (State.MovingToWaitPosition or State.Waiting))
+        {
+            Debug.LogWarning("CharacterAnimator is not in a valid state to move to leave position.");
+            yield break;
+        }
 
         yield return new WaitUntil(() => state == State.Waiting);
 
@@ -98,5 +107,40 @@ public class CharacterAnimator : MonoBehaviour
         sprite.SetActive(false);
         state = State.Disappeared;
         onDisappear?.Invoke();
+
+        Destroy(gameObject);
+    }
+
+    [Button(Mode = ButtonMode.EnabledInPlayMode)]
+    private void MoveToEnter() => StartCoroutine(E_MoveToEnter());
+
+    IEnumerator E_MoveToEnter()
+    {
+        if (state is not (State.MovingToWaitPosition or State.Waiting))
+        {
+            Debug.LogWarning("CharacterAnimator is not in a valid state to move to enter position.");
+            yield break;
+        }
+
+        yield return new WaitUntil(() => state == State.Waiting);
+
+        state = State.MovingToEnter;
+
+        Vector2 startPosition = waitPosition;
+        transform.position = startPosition;
+
+        float t = 0;
+        while (t < distanceToEnterPosition - 0.001f)
+        {
+            t = Mathf.SmoothDamp(t, distanceToEnterPosition, ref velocity, data.smoothTime, data.maxSpeed);
+            transform.position = startPosition + new Vector2(t, data.stepCurve.Evaluate(t));
+            yield return null;
+        }
+
+        sprite.SetActive(false);
+        state = State.Disappeared;
+        onDisappear?.Invoke();
+
+        Destroy(gameObject);
     }
 }
