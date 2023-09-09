@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using EasyButtons;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 public class CharacterAnimator : MonoBehaviour
 {
