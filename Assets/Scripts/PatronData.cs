@@ -20,7 +20,7 @@ public class PatronData : ScriptableObject
     public string[] discussion;
     
     public float patience;
-    public float waitTime;
+    public int waitTime;
     public float chaos;
     public int energy;
     public int duration;
@@ -36,8 +36,8 @@ public class PatronData : ScriptableObject
         d.body[2] = d.characterSpriteData.b3.Evaluate(Random.Range(0, 1));
         for(int i = 0; i < 3; i++)
             d.clothing[i] = Random.ColorHSV(0f, 1f, 0.2f, 0.8f, 0.2f, 0.9f);
-        d.patience = Random.Range(0, 1);
-        d.chaos = Random.Range(0, 1);
+        d.patience = Random.Range(0, 1f);
+        d.chaos = Random.Range(0, 1f);
         d.energy = Random.Range(1, 10);
         d.waitTime = Random.Range(3, 5) * 2;
         d.duration = Random.Range(15, 30) * 2; //Seconds
