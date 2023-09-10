@@ -234,7 +234,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -1089,11 +1089,12 @@ MonoBehaviour:
   Energy: 0
   MaxEnergy: 0
   MinEnergy: 0
-  MaxPeople: 0
-  MinPeople: 0
+  MaxPatrons: 0
+  MinPatrons: 0
   Patrons: []
   EnergyHeat: 0
   PatronHeat: 0
+  MaxHeat: 30
   OnGameOver:
     m_PersistentCalls:
       m_Calls:
@@ -1127,7 +1128,6 @@ MonoBehaviour:
   OnChaoticEvent:
     m_PersistentCalls:
       m_Calls: []
-  tickTime: 0
 --- !u!1 &1046005480
 GameObject:
   m_ObjectHideFlags: 0
