@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EasyButtons;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class Line : MonoBehaviour
@@ -21,7 +22,7 @@ public class Line : MonoBehaviour
     public Bar BarRef;
     public Action OnTick;
 
-    public Action<PatronData> OnInteract;
+    public UnityEvent<PatronData> OnInteract;
 
     public void Start() {
         MusicBeatSystem.Instance.OnBeatActions.Add(new MusicBeatSystem.BeatAction(Tick, 0));
