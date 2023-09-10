@@ -65,6 +65,7 @@ public class PatronData : ScriptableObject{
     public bool glasses;
     public Vector3 glassesPosition;
 
+    [System.NonSerialized] public Action OnLineExit;
     [System.NonSerialized] public Bar barRef;
     [System.NonSerialized] public Patron patron;
 

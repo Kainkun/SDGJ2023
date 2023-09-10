@@ -13,6 +13,7 @@ public class Line : MonoBehaviour
     public Bar BarRef;
     public Action OnTick;
 
+
     public UnityEvent<PatronData> OnInteract;
 
     public void Start() {
@@ -37,11 +38,13 @@ public class Line : MonoBehaviour
         p.patron.CharacterAnimator.MoveToEnter();
         OnTick -= p.patron.Tick;
         BarRef.Enter(p);
+        p.OnLineExit.Invoke();
         PatronDatas.RemoveFirst();
         AddPatronData();
         if (PatronDatas.First.Value == null) return;
         if(PatronDatas.First.Value.patron == null)
             CreatePatron();
+        
         PatronDatas.First.Value.patron.CharacterAnimator.MoveToWaitPosition();
     }
     
@@ -57,6 +60,7 @@ public class Line : MonoBehaviour
         p = PatronDatas.First.Value;
         PatronDatas.RemoveFirst();
         OnTick -= p.patron.Tick;
+        p.OnLineExit.Invoke();
 
         if (Random.Range(0f, 1f) > 0.25f) { // Will they try going back into line?
             PatronData.RandomizePatronData(ref p);
