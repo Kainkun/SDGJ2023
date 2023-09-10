@@ -24455,6 +24455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03644ff085cde804ba526de12ac4ffa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bar: {fileID: 867781333}
   globalOffset: 0
 --- !u!4 &2094788409
 Transform:

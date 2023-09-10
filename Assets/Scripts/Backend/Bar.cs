@@ -32,6 +32,10 @@ public class Bar : MonoBehaviour
         preRoundCountDown--;
         CheckEnergyHeat();
         CheckPatronHeat();
+        if (preRoundCountDown > 0)
+            Energy = MaxEnergy / 2;
+        if(preRoundCountDown == 0)
+            PreroundEnd(); 
         OnTick?.Invoke();
     }
 
@@ -97,5 +101,12 @@ public class Bar : MonoBehaviour
         Energy -= p.energy;
         
         Destroy(p);
+    }
+
+    void PreroundEnd() {
+        Energy = 0;
+        foreach (var patron in Patrons) {
+            Energy += patron.energy;
+        }
     }
 }

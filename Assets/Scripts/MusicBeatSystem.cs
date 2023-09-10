@@ -8,6 +8,7 @@ using UnityEngine;
 public class MusicBeatSystem : MonoBehaviour
 {
     public List<BeatAction> OnBeatActions = new();
+    public Bar bar;
 
     public float globalOffset = 0;
 
@@ -63,8 +64,18 @@ public class MusicBeatSystem : MonoBehaviour
         studioEventEmitter.Play();
     }
 
+    public static float Remap(float iMin, float iMax, float oMin, float oMax, float v)
+    {
+        float t = Mathf.InverseLerp(iMin, iMax, v);
+        return Mathf.Lerp(oMin, oMax, t);
+    }
+
     private void Update()
     {
+        float e = Remap(bar.MinEnergy, bar.MaxEnergy, 0f, 1.5f, bar.Energy);
+        float h = Remap(0, bar.MaxHeat, 0f, 0.5f, bar.EnergyHeat);
+        studioEventEmitter.SetParameter("Energy", e + h);
+        
         foreach (BeatAction onBeatAction in OnBeatActions)
         {
             if (Time.time - startTime >= onBeatAction.nextTime)
