@@ -24,6 +24,7 @@ public class Line : MonoBehaviour
         CreatePatron();
     }
 
+    [Button]
     public void Admit() {
         PatronData p = PatronDatas.First.Value;
         PatronDatas.RemoveFirst();
@@ -39,6 +40,7 @@ public class Line : MonoBehaviour
         PatronDatas.First.Value.patron.CharacterAnimator.MoveToWaitPosition();
     }
     
+    [Button]
     public void Reject() {
         PatronData p = PatronDatas.First.Value;
         if (p == null) return;
@@ -64,6 +66,7 @@ public class Line : MonoBehaviour
         PatronDatas.First.Value.patron.CharacterAnimator.MoveToWaitPosition();
     }
 
+    [Button]
     public void Interact() {
         PatronData p = PatronDatas.First.Value;
         if (p == null) return;
