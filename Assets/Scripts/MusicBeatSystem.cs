@@ -78,6 +78,9 @@ public class MusicBeatSystem : MonoBehaviour
         float h = Remap(0, bar.MaxHeat, 0f, 2f, bar.EnergyHeat);
         music.SetParameter("Energy", e);
         
+        float c = Remap(0, bar.MaxPatrons, 0f, 1f, bar.Patrons.Count);
+        music.SetParameter("Capacity", c);
+        
         foreach (BeatAction onBeatAction in OnBeatActions)
         {
             if (Time.time - startTime >= onBeatAction.nextTime)
