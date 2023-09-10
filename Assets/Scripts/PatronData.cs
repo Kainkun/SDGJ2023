@@ -11,7 +11,10 @@ public class PatronData : ScriptableObject
 {
     public CharacterSpriteData characterSpriteData;
     public CharacterAnimatorData characterAnimatorData;
-    
+
+    [Range(0, 1)]
+    public float[] body_gradient = new float[3];
+    public bool overrideGradient = false;
     public Color[] body = new Color[3];
     public Color[] clothing = new Color[3];
 
@@ -39,8 +42,8 @@ public class PatronData : ScriptableObject
         d.patience = Random.Range(0, 1f);
         d.chaos = Random.Range(0, 1f);
         d.energy = Random.Range(1, 10);
-        d.waitTime = Random.Range(3, 5) * 2;
-        d.duration = Random.Range(15, 30) * 2; //Seconds
+        d.waitTime = Random.Range(8, 15) * 2;
+        d.duration = Random.Range(40, 80) * 2; //Seconds
         return d;
     }
     
@@ -67,5 +70,7 @@ public class PatronData : ScriptableObject
     
     public void Tick() {
         duration -= 1;
+        if(duration <= 0)
+            barRef.Exit(this);
     }
 }

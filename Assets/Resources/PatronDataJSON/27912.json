@@ -14,6 +14,12 @@
             "guid": "61205dc3a4826d547a17ef14195d4f40",
             "type": 2
         },
+        "body_gradient": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "overrideGradient": false,
         "body": [
             {
                 "r": 0.0,
@@ -58,7 +64,7 @@
         "age": 0,
         "discussion": [],
         "patience": 0.0,
-        "waitTime": 0.0,
+        "waitTime": 0,
         "chaos": 0.0,
         "energy": 0,
         "duration": 0

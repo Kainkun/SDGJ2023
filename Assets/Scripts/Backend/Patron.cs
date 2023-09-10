@@ -30,31 +30,35 @@ public class Patron : MonoBehaviour
         foreach (var sr in this.GetComponentsInChildren<SpriteRenderer>())
         {
             sr.sortingLayerName = "Character";
+            char[] name = sr.name.ToCharArray();
+            if (name.Length > 2)
+                continue;
+            int i = (int)Char.GetNumericValue(name[1]) - 1;
+            switch(name[0]){
+                case 'c':
+                    ClothingRenderers[i] = sr;
+                    ClothingRenderers[i].color = PatronData.clothing[i];
+                    break;
+                case 'b':
+                    BodyRenderers[i] = sr;
+                    BodyRenderers[i].color = PatronData.body[i];
+                    break;
+                default: 
+                    break;
+            }
+
         }
 
-        Transform t;
-        for (int i = 0; i < 3; i++)
-        {
-            t = this.transform.Find("b" + (i+1));
-            if (t)
-            {
-                BodyRenderers[i] = t.GetComponent<SpriteRenderer>();
-                BodyRenderers[i].sortingLayerName = "Character";
-                BodyRenderers[i].color = PatronData.body[i];
-            }
+        if (PatronData.overrideGradient){
+            if(BodyRenderers[0]) BodyRenderers[0].color = PatronData.body[0];
+            if(BodyRenderers[1]) BodyRenderers[1].color = PatronData.body[1];
+            if(BodyRenderers[2]) BodyRenderers[2].color = PatronData.body[2];
+        } else {
+            if(BodyRenderers[0]) BodyRenderers[0].color = PatronData.characterSpriteData.b1.Evaluate(PatronData.body_gradient[0]);
+            if(BodyRenderers[1]) BodyRenderers[1].color = PatronData.characterSpriteData.b2.Evaluate(PatronData.body_gradient[1]);
+            if(BodyRenderers[2]) BodyRenderers[2].color = PatronData.characterSpriteData.b3.Evaluate(PatronData.body_gradient[2]);
         }
-        
-        for (int i = 0; i < 3; i++)
-        {
-            t = this.transform.Find("c" + (i+1));
-            if (t)
-            {
-                ClothingRenderers[i] = t.GetComponent<SpriteRenderer>();
-                ClothingRenderers[i].sortingLayerName = "Character";
-                ClothingRenderers[i].color = PatronData.clothing[i];
-            }
-        }
-        
+
         CharacterAnimator = this.gameObject.AddComponent<CharacterAnimator>();
         CharacterAnimator.data = PatronData.characterAnimatorData;
         CharacterAnimator.MoveToWaitPosition();
