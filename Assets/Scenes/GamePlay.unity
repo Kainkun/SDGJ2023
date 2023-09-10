@@ -1992,7 +1992,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707450788}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2704,7 +2704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BakedPatrons: []
   BarRef: {fileID: 867781333}
-  OnInteract:
+  OnNewPatronWait:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 742559970}
@@ -2719,6 +2719,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnInteract:
+    m_PersistentCalls:
+      m_Calls: []
   OnLeaveLine:
     m_PersistentCalls:
       m_Calls: []
@@ -18714,7 +18717,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1595698284
 RectTransform:
   m_ObjectHideFlags: 0

@@ -154,7 +154,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 837741349}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -591,7 +591,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 837741349}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -612,7 +612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -807,10 +807,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2054935959}
+  - {fileID: 836477004}
   - {fileID: 1154622263}
   - {fileID: 349457697}
   - {fileID: 1818758570}
-  - {fileID: 836477004}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -877,12 +877,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Welcome to Party Hoppers!\n\nYou're the incredible bouncer FROGNAME and
+  m_text: "Welcome to Party Hoppers!\n\nYou're the incredible bouncer Jumpy Joe and
     it's your job to keep the party vibes flowing~\n\nIf the music starts to get
     crazy, theres TOO MUCH HYPE. Chill out the party by letting less patrons in.\nIf
     the music gets funky, theres too little hype so invite more patrons!\n\nDont
     forget to use your froggy-counter\u2122 to keep track of how many patrons are
-    partying, NUMBER is the MAX CAPACITY!"
+    partying, dont go over the MAX CAPACITY!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -993,7 +993,7 @@ RectTransform:
   m_Children:
   - {fileID: 1977563812}
   m_Father: {fileID: 837741349}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1472,7 +1472,7 @@ RectTransform:
   - {fileID: 1034394405}
   - {fileID: 598469794}
   m_Father: {fileID: 837741349}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
