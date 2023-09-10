@@ -53,6 +53,9 @@ TagManager:
   - name: Character
     uniqueID: 2471840819
     locked: 0
+  - name: CharacterLeave
+    uniqueID: 3792257413
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

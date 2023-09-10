@@ -27,12 +27,12 @@ public class Line : MonoBehaviour
     [Button]
     public void Admit() {
         PatronData p = PatronDatas.First.Value;
-        PatronDatas.RemoveFirst();
         if (p == null) return;
         if (p.patron.CharacterAnimator.state != CharacterAnimator.State.Waiting) {
             return;
         }
 
+        PatronDatas.RemoveFirst();
         p.patron.CharacterAnimator.MoveToEnter();
         BarRef.Enter(p);
         PatronDatas.RemoveFirst();
