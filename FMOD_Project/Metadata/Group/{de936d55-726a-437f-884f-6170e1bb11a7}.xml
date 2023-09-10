@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{de936d55-726a-437f-884f-6170e1bb11a7}">
+		<property name="name">
+			<value>Frog</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{c1a07eca-46e9-474f-a731-6f130dec90d2}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{df759de7-07ed-4354-a349-bef6f372ce1d}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{d16547c2-36e7-4c96-a35f-830533a4a334}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{c1a07eca-46e9-474f-a731-6f130dec90d2}">
+		<relationship name="effects">
+			<destination>{d7e20d1b-4c09-422c-9f19-be704668cba8}</destination>
+			<destination>{04e55562-9f96-4a22-8c77-ab896f2fec33}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{df759de7-07ed-4354-a349-bef6f372ce1d}" />
+	<object class="MixerBusFader" id="{d7e20d1b-4c09-422c-9f19-be704668cba8}" />
+	<object class="Sidechain" id="{04e55562-9f96-4a22-8c77-ab896f2fec33}">
+		<property name="level">
+			<value>-7.5</value>
+		</property>
+	</object>
+</objects>
