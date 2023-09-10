@@ -1700,6 +1700,7 @@ GameObject:
   - component: {fileID: 647841376}
   - component: {fileID: 647841375}
   - component: {fileID: 647841374}
+  - component: {fileID: 647841377}
   m_Layer: 5
   m_Name: Deny Button
   m_TagString: Untagged
@@ -1796,6 +1797,18 @@ MonoBehaviour:
           m_StringArgument: No
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 647841377}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &647841375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1834,6 +1847,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647841372}
   m_CullTransparentMesh: 1
+--- !u!114 &647841377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647841372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -382450799
+      Data2: 1173943120
+      Data3: 1621240457
+      Data4: 1145083643
+    Path: event:/Frog_No
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &707450788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1948,7 +1992,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707450788}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -18621,7 +18665,7 @@ GameObject:
   - component: {fileID: 1595698286}
   - component: {fileID: 1595698285}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Dialogue Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18833,6 +18877,7 @@ GameObject:
   - component: {fileID: 1671262163}
   - component: {fileID: 1671262162}
   - component: {fileID: 1671262161}
+  - component: {fileID: 1671262164}
   m_Layer: 5
   m_Name: Allow Button (1)
   m_TagString: Untagged
@@ -18929,6 +18974,18 @@ MonoBehaviour:
           m_StringArgument: Yes
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1671262164}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1671262162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18967,6 +19024,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671262159}
   m_CullTransparentMesh: 1
+--- !u!114 &1671262164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671262159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1623396493
+      Data2: 1180450022
+      Data3: -340879209
+      Data4: -397905763
+    Path: event:/Frog_Yes
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1764658389
 GameObject:
   m_ObjectHideFlags: 0
@@ -24012,7 +24100,7 @@ GameObject:
   - component: {fileID: 1991714507}
   - component: {fileID: 1991714506}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Game Over Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

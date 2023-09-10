@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 
 using System.Collections.Generic;
 using System.IO;
@@ -47,3 +48,5 @@ public class PatronDataJsonManager : ScriptableObject{
     }
 
 }
+
+#endif
