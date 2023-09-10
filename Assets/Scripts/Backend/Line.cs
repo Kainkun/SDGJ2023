@@ -7,15 +7,6 @@ using Random = UnityEngine.Random;
 
 public class Line : MonoBehaviour
 {
-    private static CharacterAnimatorData[] patronAnimatorDatas;
-    private static CharacterSpriteData[] patronSpriteDatas;
-
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    static void Init() {
-        patronAnimatorDatas = Resources.LoadAll<CharacterAnimatorData>("StepData");
-        patronSpriteDatas = Resources.LoadAll<CharacterSpriteData>("SpriteData");
-       
-    }
 
     public LinkedList<PatronData> PatronDatas = new LinkedList<PatronData>();
     public List<PatronData> BakedPatrons = new List<PatronData>();
@@ -86,7 +77,6 @@ public class Line : MonoBehaviour
         if (p.patron.CharacterAnimator.state != CharacterAnimator.State.Waiting) {
             return;
         }
-
         OnInteract.Invoke(p);
     }
 
