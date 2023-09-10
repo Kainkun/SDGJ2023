@@ -19,7 +19,10 @@ public class CharacterAnimator : MonoBehaviour
     public Action onWaitPosition;
     public Action onDisappear;
 
-    [ReadOnly] public State state;
+#if UNITY_EDITOR
+    [ReadOnly]
+#endif
+    public State state;
 
     public enum State
     {
@@ -39,7 +42,7 @@ public class CharacterAnimator : MonoBehaviour
         state = State.BeforeAppear;
         stepDistance = data.stepCurve.keys[data.stepCurve.length - 1].time;
         stepRemainder = distanceToWaitPosition % stepDistance;
-        
+
         if (state is not State.BeforeAppear)
         {
             Debug.LogWarning("CharacterAnimator is not in a valid state to move to wait position.");
