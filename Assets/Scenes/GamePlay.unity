@@ -2674,6 +2674,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnLeaveLine:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &867781332
 Transform:
   m_ObjectHideFlags: 0
@@ -12724,6 +12727,34 @@ PrefabInstance:
     - target: {fileID: 3619929399978799217, guid: 1d704eb7db17910439a63cbcc7a5e21a, type: 3}
       propertyPath: m_Name
       value: Counter
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264818988945614302, guid: 1d704eb7db17910439a63cbcc7a5e21a, type: 3}
+      propertyPath: EventReference.Path
+      value: event:/Hand Clicker
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264818988945614302, guid: 1d704eb7db17910439a63cbcc7a5e21a, type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264818988945614302, guid: 1d704eb7db17910439a63cbcc7a5e21a, type: 3}
+      propertyPath: OverrideMinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264818988945614302, guid: 1d704eb7db17910439a63cbcc7a5e21a, type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 1388399877
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264818988945614302, guid: 1d704eb7db17910439a63cbcc7a5e21a, type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1205983379
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264818988945614302, guid: 1d704eb7db17910439a63cbcc7a5e21a, type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: 491018669
+      objectReference: {fileID: 0}
+    - target: {fileID: 4264818988945614302, guid: 1d704eb7db17910439a63cbcc7a5e21a, type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: -167642020
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d704eb7db17910439a63cbcc7a5e21a, type: 3}
