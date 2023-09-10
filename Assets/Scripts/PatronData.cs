@@ -2,42 +2,44 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "PatronData", menuName = "ScriptableObjects/PatronData")]
 public class PatronData : ScriptableObject
 {
-    public CharacterSpriteData CharacterSpriteData;
-    public CharacterAnimatorData CharacterAnimatorData;
+    public CharacterSpriteData characterSpriteData;
+    public CharacterAnimatorData characterAnimatorData;
     
     public Color[] body = new Color[3];
     public Color[] clothing = new Color[3];
 
-    public string Name;
-    public int Age;
+    public string name;
+    public int age;
     
-    public float Patience;
-    public float Chaos;
-    public int Energy, Duration;
-    
-    public Bar BarRef;
+    public float patience;
+    public float chaos;
+    public int energy;
+    public int duration;
+
+    public Bar barRef;
 
     public Action Tick;
     
-    public Patron Patron;
+    public Patron patron;
     
     public static PatronData RandomizePatronData(ref PatronData d, CharacterSpriteData sprite, CharacterAnimatorData anim) {
-        d.CharacterSpriteData = sprite;
-        d.CharacterAnimatorData = anim;
-        d.body[0] = d.CharacterSpriteData.b1.Evaluate(Random.Range(0, 1));
-        d.body[1] = d.CharacterSpriteData.b2.Evaluate(Random.Range(0, 1));
-        d.body[2] = d.CharacterSpriteData.b3.Evaluate(Random.Range(0, 1));
+        d.characterSpriteData = sprite;
+        d.characterAnimatorData = anim;
+        d.body[0] = d.characterSpriteData.b1.Evaluate(Random.Range(0, 1));
+        d.body[1] = d.characterSpriteData.b2.Evaluate(Random.Range(0, 1));
+        d.body[2] = d.characterSpriteData.b3.Evaluate(Random.Range(0, 1));
         for(int i = 0; i < 3; i++)
             d.clothing[i] = Random.ColorHSV(0f, 1f, 0.2f, 0.8f, 0.2f, 0.9f);
-        d.Patience = Random.Range(0, 1);
-        d.Chaos = Random.Range(0, 1);
-        d.Energy = Random.Range(1, 10);
-        d.Duration = Random.Range(5, 10);
+        d.patience = Random.Range(0, 1);
+        d.chaos = Random.Range(0, 1);
+        d.energy = Random.Range(1, 10);
+        d.duration = Random.Range(5, 10);
         return d;
     }
 
@@ -49,15 +51,15 @@ public class PatronData : ScriptableObject
     }
 
     public Patron CreatePatron() {
-        GameObject patronObject = GameObject.Instantiate(CharacterSpriteData.psb);
+        GameObject patronObject = GameObject.Instantiate(characterSpriteData.psb);
         patronObject.transform.localScale = Vector2.one * 0.1f;
-        Patron = patronObject.AddComponent<Patron>();
-        Patron.PatronData = this;
-        Patron.Init();
-        return Patron;
+        patron = patronObject.AddComponent<Patron>();
+        patron.PatronData = this;
+        patron.Init();
+        return patron;
     }
 
     public void DestroyPatron() {
-        Destroy(Patron);
+        Destroy(patron);
     }
 }

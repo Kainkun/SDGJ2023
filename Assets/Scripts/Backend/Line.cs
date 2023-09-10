@@ -21,32 +21,32 @@ public class Line : MonoBehaviour
 
     public void Start() {
         GenerateLine(100);
+        CreatePatron();
     }
 
     public void Admit() {
         PatronData p = PatronDatas.First.Value;
         PatronDatas.RemoveFirst();
         if (p == null) return;
-        if (p.Patron.CharacterAnimator.state != CharacterAnimator.State.Waiting) {
+        if (p.patron.CharacterAnimator.state != CharacterAnimator.State.Waiting) {
             return;
         }
 
-        p.Patron.CharacterAnimator.MoveToEnter();
+        p.patron.CharacterAnimator.MoveToEnter();
         BarRef.Enter(p);
         PatronDatas.RemoveFirst();
         AddPatronData();
-        PatronDatas.First.Value.Patron.CharacterAnimator.MoveToWaitPosition();
-        
+        PatronDatas.First.Value.patron.CharacterAnimator.MoveToWaitPosition();
     }
     
     public void Reject() {
         PatronData p = PatronDatas.First.Value;
         if (p == null) return;
-        if (p.Patron.CharacterAnimator.state != CharacterAnimator.State.Waiting) {
+        if (p.patron.CharacterAnimator.state != CharacterAnimator.State.Waiting) {
             return;
         }
         
-        p.Patron.CharacterAnimator.MoveToLeave();
+        p.patron.CharacterAnimator.MoveToLeave();
         p = PatronDatas.First.Value;
         PatronDatas.RemoveFirst();
 
@@ -58,16 +58,16 @@ public class Line : MonoBehaviour
         
         PatronDatas.AddLast(p);
         if (PatronDatas.First.Value == null) return;
-        if(PatronDatas.First.Value.Patron == null)
+        if(PatronDatas.First.Value.patron == null)
             CreatePatron();
         
-        PatronDatas.First.Value.Patron.CharacterAnimator.MoveToWaitPosition();
+        PatronDatas.First.Value.patron.CharacterAnimator.MoveToWaitPosition();
     }
 
     public void Interact() {
         PatronData p = PatronDatas.First.Value;
         if (p == null) return;
-        if (p.Patron.CharacterAnimator.state != CharacterAnimator.State.Waiting) {
+        if (p.patron.CharacterAnimator.state != CharacterAnimator.State.Waiting) {
             return;
         }
     }

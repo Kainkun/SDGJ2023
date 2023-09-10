@@ -19,17 +19,24 @@ public class Bar : MonoBehaviour
     public UnityEvent OnTick;
     public UnityEvent OnChaoticEvent;
 
+    public float tickTime;
+
     private void Start()
     {
-        StartCoroutine(Ticks());
+        StartCoroutine(Ticks(.25f));
     }
 
     //Tick is a unit of time
-    private IEnumerator Ticks() {
-        while (true)
-        {
-            yield return new WaitForSeconds(.25f);
-            Tick();
+    private IEnumerator Ticks(float timeBetweenTicks) {
+        while (Application.isPlaying) {
+            //yield return new WaitForSeconds(timeBetweenTicks);
+            if (tickTime <= 0) {
+                Tick();
+                tickTime = timeBetweenTicks;
+            }
+            
+            tickTime -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
         }
     }
 
@@ -64,28 +71,28 @@ public class Bar : MonoBehaviour
 
     public void Enter(PatronData p) {
         Patrons.Add(p);
-        p.BarRef = this;
+        p.barRef = this;
         OnTick.AddListener(Tick);
 
-        float chaosThresh = 1 - ((float)(Energy + p.Energy) / (float)MaxEnergy);
-        if (p.Chaos > chaosThresh) {
+        float chaosThresh = 1 - ((float)(Energy + p.energy) / (float)MaxEnergy);
+        if (p.chaos > chaosThresh) {
             ChaoticEvent();
         }
 
-        Energy += p.Energy;
+        Energy += p.energy;
     }
 
     public void Exit(PatronData p) {
         Patrons.Remove(p);
-        p.BarRef = null;
+        p.barRef = null;
         OnTick.RemoveListener(Tick);
         
-        float chaosThresh = 1 - ((float)(Energy + p.Energy) / (float)MaxEnergy);
-        if (p.Chaos > chaosThresh) {
+        float chaosThresh = 1 - ((float)(Energy + p.energy) / (float)MaxEnergy);
+        if (p.chaos > chaosThresh) {
             ChaoticEvent();
         }
         
-        Energy -= p.Energy;
+        Energy -= p.energy;
         
         Destroy(p);
     }

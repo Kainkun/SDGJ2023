@@ -11,7 +11,7 @@ public class Patron : MonoBehaviour
     public CharacterAnimator CharacterAnimator;
 
     public void Tick() {
-        PatronData.Duration -= 1;
+        PatronData.duration -= 1;
     }
 
     public void Init() {
@@ -44,7 +44,7 @@ public class Patron : MonoBehaviour
         }
         
         CharacterAnimator = this.gameObject.AddComponent<CharacterAnimator>();
-        CharacterAnimator.data = PatronData.CharacterAnimatorData;
+        CharacterAnimator.data = PatronData.characterAnimatorData;
         CharacterAnimator.MoveToWaitPosition();
     }
 }
