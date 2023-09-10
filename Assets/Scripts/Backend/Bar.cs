@@ -44,7 +44,7 @@ public class Bar : MonoBehaviour
         //TODO :: What needs to be done in tick
         CheckEnergyHeat();
         CheckPatronHeat();
-        OnTick.Invoke();
+        OnTick?.Invoke();
     }
 
     private void CheckEnergyHeat() {
@@ -72,7 +72,7 @@ public class Bar : MonoBehaviour
     public void Enter(PatronData p) {
         Patrons.Add(p);
         p.barRef = this;
-        OnTick.AddListener(Tick);
+        OnTick.AddListener(p.patron.Tick);
 
         float chaosThresh = 1 - ((float)(Energy + p.energy) / (float)MaxEnergy);
         if (p.chaos > chaosThresh) {
@@ -85,7 +85,7 @@ public class Bar : MonoBehaviour
     public void Exit(PatronData p) {
         Patrons.Remove(p);
         p.barRef = null;
-        OnTick.RemoveListener(Tick);
+        OnTick.RemoveListener(p.patron.Tick);
         
         float chaosThresh = 1 - ((float)(Energy + p.energy) / (float)MaxEnergy);
         if (p.chaos > chaosThresh) {

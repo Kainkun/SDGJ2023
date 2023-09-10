@@ -24,8 +24,6 @@ public class PatronData : ScriptableObject
 
     public Bar barRef;
 
-    public Action Tick;
-    
     public Patron patron;
     
     public static PatronData RandomizePatronData(ref PatronData d, CharacterSpriteData sprite, CharacterAnimatorData anim) {
