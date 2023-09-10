@@ -20,7 +20,14 @@ public class Dialogue : MonoBehaviour
     public void SetPatronData(PatronData patronData)
     {
         if (patronData.discussion is { Length: > 0 })
+        {
+            transform.parent.gameObject.SetActive(true);
             SetDialogue(patronData.discussion[0]);
+        }
+        else
+        {
+            transform.parent.gameObject.SetActive(false);
+        }
     }
 
     [Button]
