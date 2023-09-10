@@ -23,7 +23,8 @@ public class PatronDataJsonManager : ScriptableObject{
     public void ExportAllAsJson(){
         foreach(PatronData patron in patrons){
             string data = JsonUtility.ToJson(patron, true);
-            using (FileStream fs = new FileStream("Assets/Resources/PatronDataJSON/" + patron.name + ".json", FileMode.Create))
+            if (string.IsNullOrEmpty(patron.name)) patron.name = patron.GetHashCode() + "";
+                using (FileStream fs = new FileStream("Assets/Resources/PatronDataJSON/" + patron.name + ".json", FileMode.Create))
             {
                 using (StreamWriter writer = new StreamWriter(fs))
                 {
