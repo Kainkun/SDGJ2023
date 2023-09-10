@@ -895,7 +895,6 @@
 		<property name="timelockedOffset">
 			<value>4.0677966101694913</value>
 		</property>
-		<property name="name" />
 		<relationship name="fadeInCurve">
 			<destination>{ae2b5f24-292c-41d8-8ead-281d3ac9b390}</destination>
 		</relationship>
@@ -1583,16 +1582,25 @@
 	<object class="CompressorEffect" id="{36d57a11-24e1-4eaf-bbc4-89842c561e0d}" />
 	<object class="SFXReverbEffect" id="{9be8faca-685c-43cd-95d9-dc77023dbbb6}">
 		<property name="decayTime">
-			<value>650</value>
+			<value>1100</value>
+		</property>
+		<property name="earlyDelay">
+			<value>32</value>
+		</property>
+		<property name="lateDelay">
+			<value>52</value>
+		</property>
+		<property name="HFDecayRatio">
+			<value>53.5</value>
 		</property>
 		<property name="lowShelfGain">
 			<value>0.5</value>
 		</property>
 		<property name="highCut">
-			<value>3000</value>
+			<value>1400</value>
 		</property>
 		<property name="wetLevel">
-			<value>-12</value>
+			<value>-13.5</value>
 		</property>
 		<property name="dryLevel">
 			<value>-1</value>

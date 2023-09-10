@@ -148,9 +148,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{c002d194-11eb-440e-9470-4ce0c08a7c03}">
-		<property name="volume">
-			<value>1</value>
-		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -171,7 +168,6 @@
 		<property name="length">
 			<value>34</value>
 		</property>
-		<property name="name" />
 		<relationship name="timeline">
 			<destination>{92c4dcb7-47ac-4e78-8beb-fb0a6e8a0cf3}</destination>
 		</relationship>
@@ -198,6 +194,7 @@
 	</object>
 	<object class="MixerBusEffectChain" id="{e4a09e25-e8e1-473e-8741-d78756f93235}">
 		<relationship name="effects">
+			<destination>{3e51f7f9-12f3-4f46-a854-aa3fcac7e749}</destination>
 			<destination>{2c5e4de3-fa0a-44ce-8a55-4763ccc9cdb3}</destination>
 		</relationship>
 	</object>
@@ -229,6 +226,7 @@
 		<relationship name="effects">
 			<destination>{096ed4e0-4850-4ba1-8d1f-873274236729}</destination>
 			<destination>{1edcd3ce-b450-45aa-8b25-e1bee59c5797}</destination>
+			<destination>{f9c314db-f1d4-4d81-bb3a-0fa3a5718190}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{4436b536-647c-4707-bb9e-5ec0fa4a8f04}" />
@@ -243,6 +241,7 @@
 			<destination>{30196165-1e23-4710-822f-59d6652c56ff}</destination>
 		</relationship>
 	</object>
+	<object class="GainEffect" id="{3e51f7f9-12f3-4f46-a854-aa3fcac7e749}" />
 	<object class="MixerBusFader" id="{2c5e4de3-fa0a-44ce-8a55-4763ccc9cdb3}" />
 	<object class="AutomationPoint" id="{b08b4c7c-eb9d-4db0-b9c8-5bf6c0a23f91}">
 		<property name="position">
@@ -299,8 +298,34 @@
 			<value>0.954953492</value>
 		</property>
 		<property name="gainE">
-			<value>9.19826698</value>
+			<value>15.4387875</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{1edcd3ce-b450-45aa-8b25-e1bee59c5797}" />
+	<object class="SFXReverbEffect" id="{f9c314db-f1d4-4d81-bb3a-0fa3a5718190}">
+		<property name="decayTime">
+			<value>2900</value>
+		</property>
+		<property name="earlyDelay">
+			<value>56</value>
+		</property>
+		<property name="lateDelay">
+			<value>61</value>
+		</property>
+		<property name="HFDecayRatio">
+			<value>39.5</value>
+		</property>
+		<property name="diffusion">
+			<value>44</value>
+		</property>
+		<property name="lowShelfFrequency">
+			<value>28</value>
+		</property>
+		<property name="highCut">
+			<value>20000</value>
+		</property>
+		<property name="wetLevel">
+			<value>-13</value>
+		</property>
+	</object>
 </objects>
