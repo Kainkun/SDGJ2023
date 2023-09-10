@@ -18,6 +18,9 @@
 		<property name="initialValue">
 			<value>1</value>
 		</property>
+		<property name="seekSpeed">
+			<value>0.93999999761581421</value>
+		</property>
 		<relationship name="automators">
 			<destination>{bd75d8ac-7f3f-4d21-a24f-2d7adc060653}</destination>
 		</relationship>
