@@ -28,7 +28,7 @@ public class Line : MonoBehaviour
     }
 
     public void Tick(){
-        OnTick.Invoke();
+         OnTick?.Invoke();
     }
 
     [Button]
@@ -64,7 +64,7 @@ public class Line : MonoBehaviour
         PatronDatas.RemoveFirst();
         OnTick -= p.patron.Tick;
 
-        if (Random.Range(0, 1) > 0.25f) { // Will they try going back into line?
+        if (Random.Range(0f, 1f) > 0.25f) { // Will they try going back into line?
             PatronData.RandomizePatronData(ref p,
                 patronSpriteDatas[Random.Range(0, patronSpriteDatas.Length)],
                 patronAnimatorDatas[Random.Range(0, patronAnimatorDatas.Length)]);
@@ -89,7 +89,7 @@ public class Line : MonoBehaviour
 
     public void GenerateLine(int size, bool useBaked = true, float probability = 0.1f) {
         for (int i = 0; i < size; i++) {
-            if (useBaked && Random.Range(0, 1) > probability) {
+            if (useBaked && Random.Range(0f, 1f) > probability && BakedPatrons.Count > 0) {
                 PatronDatas.AddLast(BakedPatrons[Random.Range(0, BakedPatrons.Count)]);
                 continue;
             }

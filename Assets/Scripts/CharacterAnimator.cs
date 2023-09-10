@@ -72,6 +72,16 @@ public class CharacterAnimator : MonoBehaviour
 
     IEnumerator CR_MoveToLeave()
     {
+        if (transform.localScale.x > 0)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
+        foreach (var sr in GetComponentsInChildren<SpriteRenderer>()){
+            sr.sortingLayerName = "CharacterLeave";
+        }
+        
         if (state is not (State.MovingToWaitPosition or State.Waiting))
         {
             Debug.LogWarning("CharacterAnimator is not in a valid state to move to leave position.");

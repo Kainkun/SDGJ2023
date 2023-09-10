@@ -11,7 +11,10 @@ public class PatronData : ScriptableObject
 {
     public CharacterSpriteData characterSpriteData;
     public CharacterAnimatorData characterAnimatorData;
-    
+
+    [Range(0, 1)]
+    public float[] body_gradient = new float[3];
+    public bool overrideGradient = false;
     public Color[] body = new Color[3];
     public Color[] clothing = new Color[3];
 
@@ -20,14 +23,13 @@ public class PatronData : ScriptableObject
     public string[] discussion;
     
     public float patience;
-    public float waitTime;
+    public int waitTime;
     public float chaos;
     public int energy;
     public int duration;
 
-    public Bar barRef;
-
-    public Patron patron;
+    [System.NonSerialized] public Bar barRef;
+    [System.NonSerialized] public Patron patron;
 
     public static PatronData RandomizePatronData(ref PatronData d, CharacterSpriteData sprite, CharacterAnimatorData anim) {
         d.characterSpriteData = sprite;
@@ -37,11 +39,11 @@ public class PatronData : ScriptableObject
         d.body[2] = d.characterSpriteData.b3.Evaluate(Random.Range(0, 1));
         for(int i = 0; i < 3; i++)
             d.clothing[i] = Random.ColorHSV(0f, 1f, 0.2f, 0.8f, 0.2f, 0.9f);
-        d.patience = Random.Range(0, 1);
-        d.chaos = Random.Range(0, 1);
+        d.patience = Random.Range(0, 1f);
+        d.chaos = Random.Range(0, 1f);
         d.energy = Random.Range(1, 10);
-        d.waitTime = Random.Range(3, 5) * 2;
-        d.duration = Random.Range(15, 30) * 2; //Seconds
+        d.waitTime = Random.Range(8, 15) * 2;
+        d.duration = Random.Range(40, 80) * 2; //Seconds
         return d;
     }
     
@@ -68,5 +70,7 @@ public class PatronData : ScriptableObject
     
     public void Tick() {
         duration -= 1;
+        if(duration <= 0)
+            barRef.Exit(this);
     }
 }

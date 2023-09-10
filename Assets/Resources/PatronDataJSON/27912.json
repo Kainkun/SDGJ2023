@@ -1,0 +1,72 @@
+{
+    "MonoBehaviour": {
+        "m_Enabled": true,
+        "m_EditorHideFlags": 0,
+        "m_Name": "PatronData",
+        "m_EditorClassIdentifier": "",
+        "characterSpriteData": {
+            "fileID": 11400000,
+            "guid": "6010a20f97a5ac44cbd0174595e6ab1b",
+            "type": 2
+        },
+        "characterAnimatorData": {
+            "fileID": 11400000,
+            "guid": "61205dc3a4826d547a17ef14195d4f40",
+            "type": 2
+        },
+        "body_gradient": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "overrideGradient": false,
+        "body": [
+            {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 0.0
+            },
+            {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 0.0
+            },
+            {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 0.0
+            }
+        ],
+        "clothing": [
+            {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 0.0
+            },
+            {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 0.0
+            },
+            {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 0.0
+            }
+        ],
+        "name": "27912",
+        "age": 0,
+        "discussion": [],
+        "patience": 0.0,
+        "waitTime": 0,
+        "chaos": 0.0,
+        "energy": 0,
+        "duration": 0
+    }
+}

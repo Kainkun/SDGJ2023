@@ -14,6 +14,8 @@ public class Bar : MonoBehaviour
     public int EnergyHeat; 
     public int PatronHeat;
     public int MaxHeat = 30;
+
+    public int preRoundCountDown = 100;
     
     //begin function prototypes
     public UnityEvent OnGameOver;
@@ -27,12 +29,16 @@ public class Bar : MonoBehaviour
 
     private void Tick() {
         //TODO :: What needs to be done in tick
+        preRoundCountDown--;
         CheckEnergyHeat();
         CheckPatronHeat();
         OnTick?.Invoke();
     }
 
-    private void CheckEnergyHeat() {
+    private void CheckEnergyHeat(){
+        if (preRoundCountDown > 0)
+            return;
+        
         if (Energy > MaxEnergy || Energy < MinEnergy)
             EnergyHeat += 1;
         else
@@ -44,6 +50,9 @@ public class Bar : MonoBehaviour
     }
 
     private void CheckPatronHeat() {
+        if (preRoundCountDown > 0)
+            return;
+
         if (Patrons.Count > MaxPatrons || Patrons.Count < MinPatrons)
             PatronHeat += 1;
         else

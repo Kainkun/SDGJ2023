@@ -25,8 +25,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.0745513
-      value: 0.1111597
+      time: 0.19917871
+      value: 0.18309447
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.1491026
+      time: 0.39835742
       value: 0
       inSlope: 0
       outSlope: 0
@@ -46,4 +46,4 @@ MonoBehaviour:
     m_PostInfinity: 1
     m_RotationOrder: 4
   smoothTime: 0.1
-  maxSpeed: 1.5
+  maxSpeed: 3
