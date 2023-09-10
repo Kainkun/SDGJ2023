@@ -86,5 +86,7 @@ public class Bar : MonoBehaviour
         }
         
         Energy -= p.Energy;
+        
+        Destroy(p);
     }
 }
