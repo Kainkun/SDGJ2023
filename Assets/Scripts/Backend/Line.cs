@@ -13,15 +13,22 @@ public class Line : MonoBehaviour
     static void Init() {
         patronAnimatorDatas = Resources.LoadAll<CharacterAnimatorData>("StepData");
         patronSpriteDatas = Resources.LoadAll<CharacterSpriteData>("SpriteData");
+       
     }
 
     public LinkedList<PatronData> PatronDatas = new LinkedList<PatronData>();
     public List<PatronData> BakedPatrons = new List<PatronData>();
     public Bar BarRef;
+    public Action OnTick;
 
     public void Start() {
+        MusicBeatSystem.Instance.OnBeatActions.Add(new MusicBeatSystem.BeatAction(Tick, 0));
         GenerateLine(100);
         CreatePatron();
+    }
+
+    public void Tick(){
+        OnTick.Invoke();
     }
 
     [Button]
@@ -34,6 +41,7 @@ public class Line : MonoBehaviour
 
         PatronDatas.RemoveFirst();
         p.patron.CharacterAnimator.MoveToEnter();
+        OnTick -= p.patron.LineTick;
         BarRef.Enter(p);
         PatronDatas.RemoveFirst();
         AddPatronData();
@@ -54,6 +62,7 @@ public class Line : MonoBehaviour
         p.patron.CharacterAnimator.MoveToLeave();
         p = PatronDatas.First.Value;
         PatronDatas.RemoveFirst();
+        OnTick -= p.patron.LineTick;
 
         if (Random.Range(0, 1) > 0.25f) { // Will they try going back into line?
             PatronData.RandomizePatronData(ref p,
@@ -96,6 +105,9 @@ public class Line : MonoBehaviour
         if (PatronDatas.First.Value == null)
             return;
         PatronDatas.First.Value.CreatePatron();
+        PatronDatas.First.Value.patron.OnLeave += Reject; //If they decide to leave, just reject yourself
+        OnTick += PatronDatas.First.Value.patron.LineTick;
+        
     }
     
     public void AddPatronData(){

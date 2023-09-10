@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class Patron : MonoBehaviour
 {
@@ -9,12 +11,48 @@ public class Patron : MonoBehaviour
     public SpriteRenderer[] BodyRenderers = new SpriteRenderer[3];
     public SpriteRenderer[] ClothingRenderers = new SpriteRenderer[3];
     public CharacterAnimator CharacterAnimator;
+    public float patienceRemaining;
+    public Action OnLeave;
 
     public void Tick() {
         PatronData.duration -= 1;
+        OnLeave += Leave;
+    }
+
+    public void LineTick() {
+        patienceRemaining -= 1;
+        if (patienceRemaining <= 0) {
+            OnLeave.Invoke();
+        }
+    }
+
+    public void Leave() {
+        Transform t;
+        for (int i = 0; i < 3; i++)
+        {
+            t = this.transform.Find("b" + (i+1));
+            if (t)
+            {
+                BodyRenderers[i] = t.GetComponent<SpriteRenderer>();
+                BodyRenderers[i].sortingLayerName = "CharacterLeave";
+                BodyRenderers[i].color = PatronData.body[i];
+            }
+        }
+        
+        for (int i = 0; i < 3; i++)
+        {
+            t = this.transform.Find("c" + (i+1));
+            if (t)
+            {
+                ClothingRenderers[i] = t.GetComponent<SpriteRenderer>();
+                ClothingRenderers[i].sortingLayerName = "CharacterLeave";
+                ClothingRenderers[i].color = PatronData.clothing[i];
+            }
+        }
     }
 
     public void Init() {
+        patienceRemaining = PatronData.patience;
         foreach (var sr in this.GetComponentsInChildren<SpriteRenderer>())
         {
             sr.sortingLayerName = "Character";

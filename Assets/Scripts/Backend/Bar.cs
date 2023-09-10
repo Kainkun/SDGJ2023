@@ -13,31 +13,16 @@ public class Bar : MonoBehaviour
     //Heat like the Feds
     public int EnergyHeat; 
     public int PatronHeat;
+    public int MaxHeat = 15;
     
     //begin function prototypes
     public UnityEvent OnGameOver;
     public UnityEvent OnTick;
     public UnityEvent OnChaoticEvent;
 
-    public float tickTime;
-
     private void Start()
     {
-        StartCoroutine(Ticks(.25f));
-    }
-
-    //Tick is a unit of time
-    private IEnumerator Ticks(float timeBetweenTicks) {
-        while (Application.isPlaying) {
-            //yield return new WaitForSeconds(timeBetweenTicks);
-            if (tickTime <= 0) {
-                Tick();
-                tickTime = timeBetweenTicks;
-            }
-            
-            tickTime -= Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
+        MusicBeatSystem.Instance.OnBeatActions.Add(new MusicBeatSystem.BeatAction(Tick, 0));
     }
 
     private void Tick() {
@@ -59,6 +44,10 @@ public class Bar : MonoBehaviour
             EnergyHeat += 1;
         else
             EnergyHeat -= Math.Max(0, EnergyHeat - 1);
+
+        if (EnergyHeat >= MaxHeat) {
+            
+        }
     }
 
     private void ChaoticEvent() {
