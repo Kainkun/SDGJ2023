@@ -11,11 +11,27 @@ public class PatronData : ScriptableObject{
 
     #region Static Members
 
-    private static string[] _names;
-    private static string[] names{
+    private static string[][] _discussions;
+    private static string[][] discussions{
         get{
-            if(_names == null)
-                _names = Resources.Load<TextAsset>("Names").text.Split("\r\n");
+            if(_discussions == null){
+                TextAsset asset = Resources.Load<TextAsset>("Discussion");
+                if (asset == null)
+                    return _discussions;
+                _discussions = JsonUtility.FromJson<string[][]>(asset.text);
+            }
+            return _discussions;
+        }
+    }
+    
+    private static string[] _names;
+    private static string[] names{ get{
+            if (_names == null){
+                TextAsset asset = Resources.Load<TextAsset>("Names");
+                if (asset == null)
+                    return _names;
+                _names = asset.text.Split("\r\n");
+            }
             return _names;
         }
     }
@@ -71,9 +87,11 @@ public class PatronData : ScriptableObject{
     public static PatronData RandomizePatronData(ref PatronData d){
         d.characterSpriteData = characterSpriteDatas[Random.Range(0, characterSpriteDatas.Length)];;
         d.characterAnimatorData = characterAnimatorDatas[Random.Range(0, characterAnimatorDatas.Length)];
-        d.body[0] = d.characterSpriteData.b1.Evaluate(Random.Range(0, 1));
-        d.body[1] = d.characterSpriteData.b2.Evaluate(Random.Range(0, 1));
-        d.body[2] = d.characterSpriteData.b3.Evaluate(Random.Range(0, 1));
+        d.body[0] = d.characterSpriteData.b1.Evaluate(Random.Range(0, 1f));
+        d.body[1] = d.characterSpriteData.b2.Evaluate(Random.Range(0, 1f));
+        d.body[2] = d.characterSpriteData.b3.Evaluate(Random.Range(0, 1f));
+        if(discussions != null) d.discussion = discussions[Random.Range(0, discussions.Length)];
+        if(names != null) d.name = names[Random.Range(0, names.Length)];
         for(int i = 0; i < 3; i++)
             d.clothing[i] = Random.ColorHSV(0f, 1f, 0.2f, 0.8f, 0.2f, 0.9f);
         d.patience = Random.Range(0, 1f);

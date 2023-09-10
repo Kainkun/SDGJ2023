@@ -2,142 +2,83 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using EasyButtons;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterAnimator : MonoBehaviour
 {
-    private float distanceToWaitPosition = 5;
-    private float distanceToEnterPosition = 4.5f;
-    private Vector2 waitPosition = new Vector2(-0.4f, -2.2f);
-    private float velocity;
-
-    private float stepDistance;
-    private float stepRemainder;
+    public Transform lineFront;
+    public Transform spawnPosition;
+    public Transform enterClubPosition;
 
     public CharacterAnimatorData data;
-
-    public Action onWaitPosition;
+    
+    public UnityEvent OnArrival;
     public Action onDisappear;
 
-#if UNITY_EDITOR
-    [ReadOnly]
-#endif
-    public State state;
-
-    public enum State
-    {
-        BeforeAppear,
-        MovingToWaitPosition,
-        Waiting,
-        MovingToLeave,
-        MovingToEnter,
-        Disappeared
-    }
+    public Vector3 initialScale;
 
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
-    public void MoveToWaitPosition() => StartCoroutine(CR_MoveToWaitPosition());
+    public void MoveToWaitPosition() => SetQueue(MoveTo(this.transform.position, new Vector2(lineFront.position.x, lineFront.position.y)));
 
-    IEnumerator CR_MoveToWaitPosition()
-    {
-        state = State.BeforeAppear;
+    [Button(Mode = ButtonMode.EnabledInPlayMode)]
+    public void MoveToLeave() => SetQueue(MoveTo(this.transform.position, new Vector2(spawnPosition.position.x, spawnPosition.position.y)));
+    
+    [Button(Mode = ButtonMode.EnabledInPlayMode)]
+    public void MoveToEnter() => SetQueue(MoveTo(this.transform.position, new Vector2(enterClubPosition.position.x, enterClubPosition.position.y)));
+    
+    void Awake(){
+        lineFront = GameObject.Find("LineFront").transform;
+        spawnPosition = GameObject.Find("Spawn").transform;
+        enterClubPosition = GameObject.Find("EnterClubPosition").transform;
+        this.transform.position = spawnPosition.position;
+        initialScale = this.transform.localScale;
+    }
+
+    public float stepDistance, stepsRemaining, t, loop;
+
+    private Coroutine queue;
+    private Coroutine current;
+    public void SetQueue(IEnumerator c){
+        if(queue != null) StopCoroutine(queue);
+        queue = StartCoroutine(QueueWait(c));
+    }
+
+    IEnumerator QueueWait(IEnumerator c){
+        yield return new WaitUntil(() => current == null);
+        current = StartCoroutine(c);
+        queue = null;
+    }
+    
+    IEnumerator MoveTo(Vector2 inital, Vector2 goal){
+        queue = null;
         stepDistance = data.stepCurve.keys[data.stepCurve.length - 1].time;
-        stepRemainder = distanceToWaitPosition % stepDistance;
+        stepsRemaining = (this.transform.position.x - goal.x) / stepDistance;
 
-        if (state is not State.BeforeAppear)
-        {
-            Debug.LogWarning("CharacterAnimator is not in a valid state to move to wait position.");
-            yield break;
-        }
-
-        state = State.MovingToWaitPosition;
-
-        Vector2 startPosition = waitPosition + Vector2.left * distanceToWaitPosition;
-        transform.position = startPosition;
-
-        float t = 0;
-        while (t < distanceToWaitPosition - 0.001f)
-        {
-            t = Mathf.SmoothDamp(t, distanceToWaitPosition, ref velocity, data.smoothTime, data.maxSpeed);
-            transform.position = startPosition + new Vector2(t, data.stepCurve.Evaluate(t - stepRemainder));
-            yield return null;
-        }
-
-        transform.position = waitPosition;
-        state = State.Waiting;
-        onWaitPosition?.Invoke();
-    }
-
-    [Button(Mode = ButtonMode.EnabledInPlayMode)]
-    public void MoveToLeave() => StartCoroutine(CR_MoveToLeave());
-
-    IEnumerator CR_MoveToLeave()
-    {
-        if (transform.localScale.x > 0)
-        {
-            Vector3 scale = transform.localScale;
-            scale.x *= -1;
-            transform.localScale = scale;
-        }
-        foreach (var sr in GetComponentsInChildren<SpriteRenderer>()){
-            sr.sortingLayerName = "CharacterLeave";
-        }
+        Vector3 scale = initialScale;
+        scale.x *= Mathf.Sign(-stepsRemaining);
+        this.transform.localScale = scale;
         
-        if (state is not (State.MovingToWaitPosition or State.Waiting))
-        {
-            Debug.LogWarning("CharacterAnimator is not in a valid state to move to leave position.");
-            yield break;
+        float y = this.transform.position.y;
+
+        loop = Mathf.Abs(stepsRemaining);
+        for (float velocity=0; loop >= 0.0001f; loop = Mathf.Abs(stepsRemaining)){
+            stepsRemaining = (this.transform.position.x - goal.x) / stepDistance;
+            t = Mathf.SmoothDamp(this.transform.position.x, goal.x, ref velocity, data.smoothTime, data.maxSpeed);
+            this.transform.position = new Vector3(t, y + data.stepCurve.Evaluate(Mathf.Abs(t)));
+            if (queue != null){
+                if(data.stepCurve.Evaluate(Mathf.Abs(t)) <= 0.01f){
+                    this.transform.position = new Vector3(this.transform.position.x, y, this.transform.position.z);
+                    current = null;
+                    yield break; //Exit at nearest opportunity
+                }
+            }
+            yield return new WaitForEndOfFrame();
         }
 
-        yield return new WaitUntil(() => state == State.Waiting);
-
-        state = State.MovingToLeave;
-
-        Vector2 startPosition = waitPosition;
-        transform.position = startPosition;
-
-        float t = 0;
-        while (t < distanceToWaitPosition - 0.001f)
-        {
-            t = Mathf.SmoothDamp(t, distanceToWaitPosition, ref velocity, data.smoothTime, data.maxSpeed);
-            transform.position = startPosition + new Vector2(-t, data.stepCurve.Evaluate(t));
-            yield return null;
-        }
-
-        state = State.Disappeared;
-        onDisappear?.Invoke();
-
-        Destroy(gameObject);
-    }
-
-    [Button(Mode = ButtonMode.EnabledInPlayMode)]
-    public void MoveToEnter() => StartCoroutine(CR_MoveToEnter());
-
-    IEnumerator CR_MoveToEnter()
-    {
-        if (state is not (State.MovingToWaitPosition or State.Waiting))
-        {
-            Debug.LogWarning("CharacterAnimator is not in a valid state to move to enter position.");
-            yield break;
-        }
-
-        yield return new WaitUntil(() => state == State.Waiting);
-
-        state = State.MovingToEnter;
-
-        Vector2 startPosition = waitPosition;
-        transform.position = startPosition;
-
-        float t = 0;
-        while (t < distanceToEnterPosition - 0.001f)
-        {
-            t = Mathf.SmoothDamp(t, distanceToEnterPosition, ref velocity, data.smoothTime, data.maxSpeed);
-            transform.position = startPosition + new Vector2(t, data.stepCurve.Evaluate(t));
-            yield return null;
-        }
-
-        state = State.Disappeared;
-        onDisappear?.Invoke();
-
-        Destroy(gameObject);
+        this.transform.position = new Vector3(goal.x, y, this.transform.position.z);
+        OnArrival?.Invoke();
+        current = null;
     }
 }

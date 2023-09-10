@@ -21,6 +21,7 @@ public class Line : MonoBehaviour
         MusicBeatSystem.Instance.OnBeatActions.Add(new MusicBeatSystem.BeatAction(Tick, 0));
         GenerateLine(100);
         CreatePatron();
+        BarRef.OnGameOver.AddListener(OnGameOver);
     }
 
     public void Tick(){
@@ -31,9 +32,6 @@ public class Line : MonoBehaviour
     public void Admit() {
         PatronData p = PatronDatas.First.Value;
         if (p == null) return;
-        if (p.patron.CharacterAnimator.state != CharacterAnimator.State.Waiting) {
-            return;
-        }
 
         PatronDatas.RemoveFirst();
         p.patron.CharacterAnimator.MoveToEnter();
@@ -54,10 +52,6 @@ public class Line : MonoBehaviour
     public void Reject() {
         PatronData p = PatronDatas.First.Value;
         if (p == null) return;
-        if (p.patron.CharacterAnimator.state != CharacterAnimator.State.Waiting) {
-            return;
-        }
-        
         p.patron.CharacterAnimator.MoveToLeave();
         p = PatronDatas.First.Value;
         PatronDatas.RemoveFirst();
@@ -80,9 +74,6 @@ public class Line : MonoBehaviour
     public void Interact() {
         PatronData p = PatronDatas.First.Value;
         if (p == null) return;
-        if (p.patron.CharacterAnimator.state != CharacterAnimator.State.Waiting) {
-            return;
-        }
         OnInteract.Invoke(p);
     }
 
@@ -94,6 +85,15 @@ public class Line : MonoBehaviour
             }
 
             PatronDatas.AddLast(PatronData.GeneratePatronData());
+        }
+    }
+
+    public void OnGameOver(){
+        foreach (var patron in PatronDatas){
+            if(patron.patron != null)
+                patron.patron.CharacterAnimator.MoveToLeave();
+
+            
         }
     }
 
@@ -110,6 +110,4 @@ public class Line : MonoBehaviour
     public void AddPatronData(){
         PatronDatas.AddLast(PatronData.GeneratePatronData());
     }
-
-
 }
