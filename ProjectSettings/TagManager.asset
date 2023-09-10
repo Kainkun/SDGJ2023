@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Emissive
+    uniqueID: 2663134061
+    locked: 0
   - name: Sky
     uniqueID: 3271358639
     locked: 0
