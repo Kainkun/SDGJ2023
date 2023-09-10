@@ -22,8 +22,7 @@ public class Bar : MonoBehaviour
     public UnityEvent OnTick;
     public UnityEvent OnChaoticEvent;
 
-    private void Start()
-    {
+    private void Start(){
         MusicBeatSystem.Instance.OnBeatActions.Add(new MusicBeatSystem.BeatAction(Tick, 0));
     }
 

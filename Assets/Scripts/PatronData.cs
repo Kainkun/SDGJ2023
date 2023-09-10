@@ -87,9 +87,9 @@ public class PatronData : ScriptableObject{
     public static PatronData RandomizePatronData(ref PatronData d){
         d.characterSpriteData = characterSpriteDatas[Random.Range(0, characterSpriteDatas.Length)];;
         d.characterAnimatorData = characterAnimatorDatas[Random.Range(0, characterAnimatorDatas.Length)];
-        d.body[0] = d.characterSpriteData.b1.Evaluate(Random.Range(0, 1f));
-        d.body[1] = d.characterSpriteData.b2.Evaluate(Random.Range(0, 1f));
-        d.body[2] = d.characterSpriteData.b3.Evaluate(Random.Range(0, 1f));
+        d.body[0] = d.characterSpriteData.b1.Evaluate(d.body_gradient[0] = Random.Range(0, 1f));
+        d.body[1] = d.characterSpriteData.b2.Evaluate(d.body_gradient[1] = Random.Range(0, 1f));
+        d.body[2] = d.characterSpriteData.b3.Evaluate(d.body_gradient[2] = Random.Range(0, 1f));
         if(discussions != null) d.discussion = discussions[Random.Range(0, discussions.Length)];
         if(names != null) d.name = names[Random.Range(0, names.Length)];
         for(int i = 0; i < 3; i++)

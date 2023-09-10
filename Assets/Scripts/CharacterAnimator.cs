@@ -35,6 +35,7 @@ public class CharacterAnimator : MonoBehaviour
         this.transform.position = spawnPosition.position;
         initialScale = this.transform.localScale;
     }
+    
 
     public float stepDistance, stepsRemaining, t, loop;
 
@@ -50,7 +51,7 @@ public class CharacterAnimator : MonoBehaviour
         current = StartCoroutine(c);
         queue = null;
     }
-    
+
     IEnumerator MoveTo(Vector2 inital, Vector2 goal){
         queue = null;
         stepDistance = data.stepCurve.keys[data.stepCurve.length - 1].time;

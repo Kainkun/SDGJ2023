@@ -21,9 +21,8 @@ public class Patron : MonoBehaviour
         }
     }
 
-    public void Leave()
-    {
-
+    public void Leave(){
+        
     }
 
     public void Init() {
@@ -46,7 +45,6 @@ public class Patron : MonoBehaviour
                 default: 
                     break;
             }
-
         }
 
         if (PatronData.overrideGradient){
