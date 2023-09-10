@@ -356,6 +356,10 @@
 		<property name="length">
 			<value>85.423729166666661</value>
 		</property>
+		<property name="name" />
+		<property name="volume">
+			<value>2</value>
+		</property>
 		<relationship name="automators">
 			<destination>{795d60b5-93b9-427b-93fd-b92f73dc2c35}</destination>
 		</relationship>
@@ -403,6 +407,9 @@
 	<object class="SingleSound" id="{f61cb04b-f590-47c2-a015-7dbef7995406}">
 		<property name="length">
 			<value>85.423729166666661</value>
+		</property>
+		<property name="volume">
+			<value>2.5</value>
 		</property>
 		<relationship name="automators">
 			<destination>{d9be7247-5f0a-49d6-ba64-b0d48ef1d6e1}</destination>
