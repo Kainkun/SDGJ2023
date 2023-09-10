@@ -20,7 +20,7 @@ public class DiscoLight : MonoBehaviour
 
     private void Start()
     {
-        MusicBeatSystem.Instance.OnBeatActions.Add(new MusicBeatSystem.BeatAction(Pulse, -0.125f));
+        MusicBeatSystem.Instance.OnBeatActions.Add(new MusicBeatSystem.BeatAction(Pulse, -0.15f));
 
         light2D = GetComponent<Light2D>();
         startingIntensity = light2D.intensity;

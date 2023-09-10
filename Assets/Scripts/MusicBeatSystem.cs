@@ -9,6 +9,12 @@ public class MusicBeatSystem : MonoBehaviour
 {
     public List<BeatAction> OnBeatActions = new();
 
+    public float globalOffset = 0;
+
+    private StudioEventEmitter studioEventEmitter;
+
+    private bool musicGoing = false;
+
     public class BeatAction
     {
         public Action onBeat;
@@ -39,18 +45,20 @@ public class MusicBeatSystem : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        studioEventEmitter = GetComponent<StudioEventEmitter>();
     }
 
     private void Start()
     {
-        beatInterval = 60f / 112f;
+        beatInterval = 60f / 118f;
     }
-    
+
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
     public void StartMusic()
     {
+        musicGoing = true;
         startTime = Time.time;
-        GetComponent<StudioEventEmitter>().Play();
+        studioEventEmitter.Play();
     }
 
     private void Update()
@@ -59,10 +67,29 @@ public class MusicBeatSystem : MonoBehaviour
         {
             if (Time.time - startTime >= onBeatAction.nextTime)
             {
-                onBeatAction.onBeat?.Invoke();
+                if (musicGoing)
+                    onBeatAction.onBeat?.Invoke();
                 onBeatAction.currentBeat++;
-                onBeatAction.nextTime = (onBeatAction.currentBeat * beatInterval) + onBeatAction.timeOffset;
+                onBeatAction.nextTime =
+                    (onBeatAction.currentBeat * beatInterval) + onBeatAction.timeOffset + globalOffset;
             }
         }
+    }
+
+    [Button]
+    public void KillMusic() => StartCoroutine(CR_KillMusic());
+
+    IEnumerator CR_KillMusic()
+    {
+        musicGoing = false;
+        float t = 0;
+        while (t < 2)
+        {
+            t += Time.deltaTime * 0.2f;
+            studioEventEmitter.SetParameter("Stop The Party", t);
+            yield return null;
+        }
+
+        studioEventEmitter.SetParameter("Stop The Party", 2f);
     }
 }

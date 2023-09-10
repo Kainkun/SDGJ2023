@@ -11,20 +11,20 @@ public class Counter : MonoBehaviour
 
     private void Awake()
     {
-        text.text = count.ToString().PadLeft(2, '0');
+        text.text = count.ToString().PadLeft(3, '0');
     }
 
     public void Increment()
     {
         count++;
         count = Mathf.Min(99, count);
-        text.text = count.ToString().PadLeft(2, '0');
+        text.text = count.ToString().PadLeft(3, '0');
     }
 
     public void Decrement()
     {
         count--;
         count = Mathf.Max(0, count);
-        text.text = count.ToString().PadLeft(2, '0');
+        text.text = count.ToString().PadLeft(3, '0');
     }
 }
