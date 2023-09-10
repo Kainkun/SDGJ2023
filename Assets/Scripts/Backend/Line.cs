@@ -28,7 +28,7 @@ public class Line : MonoBehaviour
     }
 
     public void Tick(){
-        OnTick.Invoke();
+         OnTick?.Invoke();
     }
 
     [Button]
@@ -89,7 +89,7 @@ public class Line : MonoBehaviour
 
     public void GenerateLine(int size, bool useBaked = true, float probability = 0.1f) {
         for (int i = 0; i < size; i++) {
-            if (useBaked && Random.Range(0f, 1f) > probability) {
+            if (useBaked && Random.Range(0f, 1f) > probability && BakedPatrons.Count > 0) {
                 PatronDatas.AddLast(BakedPatrons[Random.Range(0, BakedPatrons.Count)]);
                 continue;
             }
