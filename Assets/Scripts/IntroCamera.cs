@@ -74,14 +74,14 @@ public class IntroCamera : MonoBehaviour
 
         canvasGroup.alpha = 1;
         
-        yield return new WaitForSeconds(0.5f);
-
-        for (int i = 0; i < 2; i++)
-        {
-            canvasGroup.alpha = 0;
-            yield return new WaitForSeconds(0.2f);
-            canvasGroup.alpha = 1;
-            yield return new WaitForSeconds(0.4f);
-        }
+        // yield return new WaitForSeconds(0.5f);
+        //
+        // for (int i = 0; i < 2; i++)
+        // {
+        //     canvasGroup.alpha = 0;
+        //     yield return new WaitForSeconds(0.2f);
+        //     canvasGroup.alpha = 1;
+        //     yield return new WaitForSeconds(0.4f);
+        // }
     }
 }
