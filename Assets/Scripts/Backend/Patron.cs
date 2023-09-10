@@ -6,23 +6,9 @@ using UnityEngine.Events;
 public class Patron : MonoBehaviour
 {
     public PatronData PatronData;
-    public SpriteRenderer[] BodyRenderers;
-    public SpriteRenderer[] ClothingRenderers;
-    
-    public Patron(int patience, float chaos, int energy, int duration) {
-        PatronData.Patience = patience;
-        PatronData.Chaos = chaos;
-        PatronData.Energy = energy;
-        PatronData.Duration = duration;
-        PatronData.Tick = Tick;
-        PatronData.Patron = this;
-    }
-
-    public Patron() : this(Random.Range(0, 100), 
-                            Random.Range(0, 100),
-                            Random.Range(0, 100),
-                            Random.Range(0, 100))
-    { }
+    public SpriteRenderer[] BodyRenderers = new SpriteRenderer[3];
+    public SpriteRenderer[] ClothingRenderers = new SpriteRenderer[3];
+    public CharacterAnimator CharacterAnimator;
 
     public void Tick() {
         PatronData.Duration -= 1;
@@ -56,5 +42,9 @@ public class Patron : MonoBehaviour
                 ClothingRenderers[i].color = PatronData.clothing[i];
             }
         }
+        
+        CharacterAnimator = this.gameObject.AddComponent<CharacterAnimator>();
+        CharacterAnimator.data = PatronData.CharacterAnimatorData;
+        CharacterAnimator.MoveToWaitPosition();
     }
 }
