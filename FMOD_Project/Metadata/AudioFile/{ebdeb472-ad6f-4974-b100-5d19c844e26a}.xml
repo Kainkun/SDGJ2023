@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{ebdeb472-ad6f-4974-b100-5d19c844e26a}">
+		<property name="assetPath">
+			<value>Samba_1.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>85.423729166666661</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{8e6937c7-c5fb-4de0-8c17-2f87f1b36483}</destination>
+		</relationship>
+	</object>
+</objects>
