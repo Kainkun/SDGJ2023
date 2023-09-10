@@ -22,27 +22,8 @@ public class Patron : MonoBehaviour
     }
 
     public void Leave() {
-        Transform t;
-        for (int i = 0; i < 3; i++)
-        {
-            t = this.transform.Find("b" + (i+1));
-            if (t)
-            {
-                BodyRenderers[i] = t.GetComponent<SpriteRenderer>();
-                BodyRenderers[i].sortingLayerName = "CharacterLeave";
-                BodyRenderers[i].color = PatronData.body[i];
-            }
-        }
-        
-        for (int i = 0; i < 3; i++)
-        {
-            t = this.transform.Find("c" + (i+1));
-            if (t)
-            {
-                ClothingRenderers[i] = t.GetComponent<SpriteRenderer>();
-                ClothingRenderers[i].sortingLayerName = "CharacterLeave";
-                ClothingRenderers[i].color = PatronData.clothing[i];
-            }
+        foreach (var sr in this.GetComponentsInChildren<SpriteRenderer>()){
+            sr.sortingLayerName = "Character";
         }
     }
 

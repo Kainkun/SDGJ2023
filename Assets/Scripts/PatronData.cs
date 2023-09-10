@@ -1,4 +1,5 @@
 using System;
+using EasyButtons;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,6 +17,7 @@ public class PatronData : ScriptableObject
 
     public string name;
     public int age;
+    public string[] discussion;
     
     public float patience;
     public float waitTime;
@@ -26,7 +28,7 @@ public class PatronData : ScriptableObject
     public Bar barRef;
 
     public Patron patron;
-    
+
     public static PatronData RandomizePatronData(ref PatronData d, CharacterSpriteData sprite, CharacterAnimatorData anim) {
         d.characterSpriteData = sprite;
         d.characterAnimatorData = anim;
@@ -49,6 +51,7 @@ public class PatronData : ScriptableObject
         return d;
     }
 
+    [Button]
     public Patron CreatePatron() {
         GameObject patronObject = GameObject.Instantiate(characterSpriteData.psb);
         if(name != null) patronObject.transform.name = name;

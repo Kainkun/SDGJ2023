@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Bar : MonoBehaviour
 {
-    public int Energy, MaxEnergy, MinEnergy;
+    public int Energy, MaxEnergy = 100, MinEnergy = 10;
     public int MaxPatrons, MinPatrons;
     public List<PatronData> Patrons = new List<PatronData>();
 
