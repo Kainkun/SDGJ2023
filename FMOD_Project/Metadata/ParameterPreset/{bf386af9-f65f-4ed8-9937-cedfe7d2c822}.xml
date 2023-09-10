@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{bf386af9-f65f-4ed8-9937-cedfe7d2c822}">
+		<property name="name">
+			<value>Stop The Party</value>
+		</property>
+		<relationship name="folder">
+			<destination>{df254ef9-00c8-4cb4-8210-b44480785a3c}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{52a5c925-9ac5-4c83-b524-8c334949c8dd}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{52a5c925-9ac5-4c83-b524-8c334949c8dd}">
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>1.9799998998641968</value>
+		</property>
+	</object>
+</objects>
