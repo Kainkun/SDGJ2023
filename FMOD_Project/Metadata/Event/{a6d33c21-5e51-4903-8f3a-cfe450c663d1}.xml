@@ -121,6 +121,9 @@
 		</relationship>
 	</object>
 	<object class="MultiSound" id="{ba8c4063-3597-4832-bce3-9b907995b577}">
+		<property name="isCutoff">
+			<value>true</value>
+		</property>
 		<property name="length">
 			<value>2</value>
 		</property>
