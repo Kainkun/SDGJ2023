@@ -49,6 +49,9 @@
 		</relationship>
 	</object>
 	<object class="MixerInput" id="{3ae10d43-d7e0-409c-9595-9d0646df2449}">
+		<relationship name="masters">
+			<destination>{6625bab2-6de6-4c6f-9608-7aa83d5cff09}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{550b2f85-e114-4702-9594-c268f000f518}</destination>
 		</relationship>
@@ -56,7 +59,7 @@
 			<destination>{43af6604-c1e3-45ac-89e1-1cd25648def5}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{d16547c2-36e7-4c96-a35f-830533a4a334}</destination>
+			<destination>{3e18fca5-0e14-4773-8660-57cf57307f82}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{a4449f5b-6f62-4d9e-948b-2a968cf72ced}" />
@@ -165,6 +168,7 @@
 	<object class="MixerBusEffectChain" id="{62470ebb-4122-4949-952a-eb67f65d58aa}">
 		<relationship name="effects">
 			<destination>{47a3de41-ee6a-4c7a-8e28-73d956d52b43}</destination>
+			<destination>{1e04acf4-5cab-49a3-a73f-e025bb8c32b6}</destination>
 			<destination>{36100cc1-5a9b-481e-b6da-46b35b4f9671}</destination>
 		</relationship>
 	</object>
@@ -246,6 +250,11 @@
 			<value>9.5</value>
 		</property>
 		<property name="wetLevel">
+			<value>-19.5</value>
+		</property>
+	</object>
+	<object class="Sidechain" id="{1e04acf4-5cab-49a3-a73f-e025bb8c32b6}">
+		<property name="level">
 			<value>-19.5</value>
 		</property>
 	</object>

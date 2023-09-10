@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="ParameterPreset" id="{8fe29b0a-1679-4524-a208-b6325f744bff}">
 		<property name="name">
-			<value>Pitch</value>
+			<value>Pitch Down</value>
 		</property>
 		<relationship name="folder">
 			<destination>{df254ef9-00c8-4cb4-8210-b44480785a3c}</destination>
@@ -13,15 +13,26 @@
 	</object>
 	<object class="GameParameter" id="{58cc9444-b7ec-4faf-a599-61a2e7351c18}">
 		<property name="initialValue">
-			<value>1</value>
+			<value>0</value>
 		</property>
 		<relationship name="automators">
 			<destination>{1776d0bb-2a07-4917-ac34-fbd6b4c8a7ab}</destination>
+		</relationship>
+		<relationship name="modulators">
+			<destination>{b7a15272-5b57-4f8b-a950-2d18dd5c7ab5}</destination>
 		</relationship>
 	</object>
 	<object class="Automator" id="{1776d0bb-2a07-4917-ac34-fbd6b4c8a7ab}">
 		<property name="nameOfPropertyBeingAutomated">
 			<value>cursorPosition</value>
+		</property>
+	</object>
+	<object class="RandomizerModulator" id="{b7a15272-5b57-4f8b-a950-2d18dd5c7ab5}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>cursorPosition</value>
+		</property>
+		<property name="amount">
+			<value>35.5</value>
 		</property>
 	</object>
 </objects>
