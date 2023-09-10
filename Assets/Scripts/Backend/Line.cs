@@ -15,6 +15,7 @@ public class Line : MonoBehaviour
 
 
     public UnityEvent<PatronData> OnInteract;
+    public UnityEvent<PatronData> OnLeaveLine;
 
     public void Start() {
         MusicBeatSystem.Instance.OnBeatActions.Add(new MusicBeatSystem.BeatAction(Tick, 0));
@@ -38,7 +39,8 @@ public class Line : MonoBehaviour
         p.patron.CharacterAnimator.MoveToEnter();
         OnTick -= p.patron.Tick;
         BarRef.Enter(p);
-        p.OnLineExit.Invoke();
+        
+        OnLeaveLine.Invoke(p);
         PatronDatas.RemoveFirst();
         AddPatronData();
         if (PatronDatas.First.Value == null) return;
@@ -60,7 +62,7 @@ public class Line : MonoBehaviour
         p = PatronDatas.First.Value;
         PatronDatas.RemoveFirst();
         OnTick -= p.patron.Tick;
-        p.OnLineExit.Invoke();
+        OnLeaveLine.Invoke(p);
 
         if (Random.Range(0f, 1f) > 0.25f) { // Will they try going back into line?
             PatronData.RandomizePatronData(ref p);
