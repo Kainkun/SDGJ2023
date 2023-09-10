@@ -25,9 +25,8 @@ public class PatronData : ScriptableObject
     public int energy;
     public int duration;
 
-    public Bar barRef;
-
-    public Patron patron;
+    [System.NonSerialized] public Bar barRef;
+    [System.NonSerialized] public Patron patron;
 
     public static PatronData RandomizePatronData(ref PatronData d, CharacterSpriteData sprite, CharacterAnimatorData anim) {
         d.characterSpriteData = sprite;
