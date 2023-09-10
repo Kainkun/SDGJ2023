@@ -37,6 +37,9 @@ public class Line : MonoBehaviour
         BarRef.Enter(p);
         PatronDatas.RemoveFirst();
         AddPatronData();
+        if (PatronDatas.First.Value == null) return;
+        if(PatronDatas.First.Value.patron == null)
+            CreatePatron();
         PatronDatas.First.Value.patron.CharacterAnimator.MoveToWaitPosition();
     }
     
