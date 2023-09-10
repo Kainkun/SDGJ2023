@@ -8,7 +8,7 @@ public class Bar : MonoBehaviour
 {
     public int Energy, MaxEnergy, MinEnergy;
     public int MaxPeople, MinPeople;
-    public List<Patron> Patrons = new List<Patron>();
+    public List<PatronData> Patrons = new List<PatronData>();
 
     //Heat like the Feds
     public int EnergyHeat; 
@@ -19,7 +19,20 @@ public class Bar : MonoBehaviour
     public UnityEvent OnTick;
     public UnityEvent OnChaoticEvent;
 
+    private void Start()
+    {
+        StartCoroutine(Ticks());
+    }
+
     //Tick is a unit of time
+    private IEnumerator Ticks() {
+        while (true)
+        {
+            yield return new WaitForSeconds(.25f);
+            Tick();
+        }
+    }
+
     private void Tick() {
         //TODO :: What needs to be done in tick
         CheckEnergyHeat();
@@ -49,10 +62,10 @@ public class Bar : MonoBehaviour
         OnGameOver.Invoke();
     }
 
-    public void Enter(Patron p) {
+    public void Enter(PatronData p) {
         Patrons.Add(p);
         p.BarRef = this;
-        OnTick.AddListener(p.Tick);
+        OnTick.AddListener(Tick);
 
         float chaosThresh = 1 - ((float)(Energy + p.Energy) / (float)MaxEnergy);
         if (p.Chaos > chaosThresh) {
@@ -62,10 +75,10 @@ public class Bar : MonoBehaviour
         Energy += p.Energy;
     }
 
-    public void Exit(Patron p) {
+    public void Exit(PatronData p) {
         Patrons.Remove(p);
         p.BarRef = null;
-        OnTick.RemoveListener(p.Tick);
+        OnTick.RemoveListener(Tick);
         
         float chaosThresh = 1 - ((float)(Energy + p.Energy) / (float)MaxEnergy);
         if (p.Chaos > chaosThresh) {

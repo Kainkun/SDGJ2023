@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CharacterSpriteData", menuName = "ScriptableObjects/CharacterSpriteData")]
-public class PatronSpriteData : ScriptableObject
+public class CharacterSpriteData : ScriptableObject
 {
     public GameObject psb
     {

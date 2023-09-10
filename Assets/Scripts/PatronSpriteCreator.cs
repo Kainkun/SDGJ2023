@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class PatronSpriteCreator
 {
-    private static PatronSpriteData[] patronDatas;
+    private static CharacterSpriteData[] patronDatas;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     static void Init()
     {
-        patronDatas = Resources.LoadAll<PatronSpriteData>("SpriteData");
+        patronDatas = Resources.LoadAll<CharacterSpriteData>("SpriteData");
     }
 
     [MenuItem("Tests/Create Many Patrons")]
@@ -23,7 +23,7 @@ public class PatronSpriteCreator
             {
                 for (int y = 0; y < 15; y++)
                 {
-                    PatronSpriteData data = patronDatas[i];
+                    CharacterSpriteData data = patronDatas[i];
                     GameObject o = CreatePatron(data);
                     o.transform.position = new Vector3((x * 2) + (i * 2 * 15), y * 2, 0);
                 }
@@ -37,9 +37,9 @@ public class PatronSpriteCreator
         return CreatePatron(patronDatas[Random.Range(0, patronDatas.Length)]);
     }
 
-    public static GameObject CreatePatron(PatronSpriteData patronData)
+    public static GameObject CreatePatron(CharacterSpriteData characterData)
     {
-        GameObject patronObject = Object.Instantiate(patronData.psb);
+        GameObject patronObject = Object.Instantiate(characterData.psb);
         patronObject.transform.localScale = Vector2.one * 0.1f;
 
         List<Color> pickedColors = new List<Color>();
@@ -53,7 +53,7 @@ public class PatronSpriteCreator
         t = patronObject.transform.Find("b1");
         if (t)
         {
-            Color color = patronData.b1.Evaluate(Random.Range(0f, 1f));
+            Color color = characterData.b1.Evaluate(Random.Range(0f, 1f));
             pickedColors.Add(color);
             SpriteRenderer sr = t.GetComponent<SpriteRenderer>();
             sr.sortingLayerName = "Character";
@@ -63,7 +63,7 @@ public class PatronSpriteCreator
         t = patronObject.transform.Find("b2");
         if (t)
         {
-            Color color = patronData.b2.Evaluate(Random.Range(0f, 1f));
+            Color color = characterData.b2.Evaluate(Random.Range(0f, 1f));
             pickedColors.Add(color);
             SpriteRenderer sr = t.GetComponent<SpriteRenderer>();
             sr.sortingLayerName = "Character";
@@ -73,7 +73,7 @@ public class PatronSpriteCreator
         t = patronObject.transform.Find("b3");
         if (t)
         {
-            Color color = patronData.b3.Evaluate(Random.Range(0f, 1f));
+            Color color = characterData.b3.Evaluate(Random.Range(0f, 1f));
             pickedColors.Add(color);
             SpriteRenderer sr = t.GetComponent<SpriteRenderer>();
             sr.sortingLayerName = "Character";
