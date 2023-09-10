@@ -21,6 +21,8 @@ public class Line : MonoBehaviour
     public Bar BarRef;
     public Action OnTick;
 
+    public Action<PatronData> OnInteract;
+
     public void Start() {
         MusicBeatSystem.Instance.OnBeatActions.Add(new MusicBeatSystem.BeatAction(Tick, 0));
         GenerateLine(100);
@@ -65,9 +67,7 @@ public class Line : MonoBehaviour
         OnTick -= p.patron.Tick;
 
         if (Random.Range(0f, 1f) > 0.25f) { // Will they try going back into line?
-            PatronData.RandomizePatronData(ref p,
-                patronSpriteDatas[Random.Range(0, patronSpriteDatas.Length)],
-                patronAnimatorDatas[Random.Range(0, patronAnimatorDatas.Length)]);
+            PatronData.RandomizePatronData(ref p);
         }
         
         PatronDatas.AddLast(p);
@@ -85,6 +85,8 @@ public class Line : MonoBehaviour
         if (p.patron.CharacterAnimator.state != CharacterAnimator.State.Waiting) {
             return;
         }
+
+        OnInteract.Invoke(p);
     }
 
     public void GenerateLine(int size, bool useBaked = true, float probability = 0.1f) {
@@ -94,9 +96,7 @@ public class Line : MonoBehaviour
                 continue;
             }
 
-            PatronDatas.AddLast(PatronData.GeneratePatronData(
-                patronSpriteDatas[Random.Range(0, patronSpriteDatas.Length)],
-                patronAnimatorDatas[Random.Range(0, patronAnimatorDatas.Length)]));
+            PatronDatas.AddLast(PatronData.GeneratePatronData());
         }
     }
 
@@ -111,9 +111,7 @@ public class Line : MonoBehaviour
     }
     
     public void AddPatronData(){
-        PatronDatas.AddLast(PatronData.GeneratePatronData(
-            patronSpriteDatas[Random.Range(0, patronSpriteDatas.Length)],
-            patronAnimatorDatas[Random.Range(0, patronAnimatorDatas.Length)]));
+        PatronDatas.AddLast(PatronData.GeneratePatronData());
     }
 
 

@@ -7,8 +7,39 @@ using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "PatronData", menuName = "ScriptableObjects/PatronData")]
-public class PatronData : ScriptableObject
-{
+public class PatronData : ScriptableObject{
+
+    #region Static Members
+
+    private static string[] _names;
+    private static string[] names{
+        get{
+            if(_names == null)
+                _names = Resources.Load<TextAsset>("Names").text.Split("\r\n");
+            return _names;
+        }
+    }
+    
+    private static CharacterAnimatorData[] _characterAnimatorDatas;
+    private static CharacterAnimatorData[] characterAnimatorDatas{
+        get{
+            if(_characterAnimatorDatas == null)
+                _characterAnimatorDatas = Resources.LoadAll<CharacterAnimatorData>("StepData");
+            return _characterAnimatorDatas;
+        }
+    }
+    
+    private static CharacterSpriteData[] _characterSpriteDatas;
+    private static CharacterSpriteData[] characterSpriteDatas{
+        get{
+            if(_characterAnimatorDatas == null)
+                _characterSpriteDatas = Resources.LoadAll<CharacterSpriteData>("SpriteData");
+            return _characterSpriteDatas;
+        }
+    }
+
+    #endregion
+    
     public CharacterSpriteData characterSpriteData;
     public CharacterAnimatorData characterAnimatorData;
 
@@ -17,6 +48,9 @@ public class PatronData : ScriptableObject
     public bool overrideGradient = false;
     public Color[] body = new Color[3];
     public Color[] clothing = new Color[3];
+
+    public bool overrideID;
+    public PatronData ID;
 
     public string name;
     public int age;
@@ -28,12 +62,15 @@ public class PatronData : ScriptableObject
     public int energy;
     public int duration;
 
+    public bool glasses;
+    public Vector3 glassesPosition;
+
     [System.NonSerialized] public Bar barRef;
     [System.NonSerialized] public Patron patron;
 
-    public static PatronData RandomizePatronData(ref PatronData d, CharacterSpriteData sprite, CharacterAnimatorData anim) {
-        d.characterSpriteData = sprite;
-        d.characterAnimatorData = anim;
+    public static PatronData RandomizePatronData(ref PatronData d){
+        d.characterSpriteData = characterSpriteDatas[Random.Range(0, characterSpriteDatas.Length)];;
+        d.characterAnimatorData = characterAnimatorDatas[Random.Range(0, characterAnimatorDatas.Length)];
         d.body[0] = d.characterSpriteData.b1.Evaluate(Random.Range(0, 1));
         d.body[1] = d.characterSpriteData.b2.Evaluate(Random.Range(0, 1));
         d.body[2] = d.characterSpriteData.b3.Evaluate(Random.Range(0, 1));
@@ -44,12 +81,13 @@ public class PatronData : ScriptableObject
         d.energy = Random.Range(1, 10);
         d.waitTime = Random.Range(8, 15) * 2;
         d.duration = Random.Range(40, 80) * 2; //Seconds
+        d.age = Random.Range(16, 40);
         return d;
     }
     
-    public static PatronData GeneratePatronData(CharacterSpriteData sprite, CharacterAnimatorData anim) {
+    public static PatronData GeneratePatronData() {
         PatronData d = ScriptableObject.CreateInstance<PatronData>();
-        RandomizePatronData(ref d, sprite, anim);
+        RandomizePatronData(ref d);
         return d;
     }
 
