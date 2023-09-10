@@ -133,7 +133,6 @@
 		</property>
 	</object>
 	<object class="SingleSound" id="{3eb30a3e-25f3-47c8-91df-251ffc937daf}">
-		<property name="name" />
 		<property name="volume">
 			<value>1.5</value>
 		</property>
@@ -162,7 +161,7 @@
 			<value>pitch</value>
 		</property>
 		<property name="amount">
-			<value>4.5</value>
+			<value>4</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{842f152d-a143-49b4-9629-72f0d26f1362}" />
