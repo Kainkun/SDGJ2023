@@ -7,13 +7,13 @@ using UnityEngine.Events;
 public class Bar : MonoBehaviour
 {
     public int Energy, MaxEnergy, MinEnergy;
-    public int MaxPeople, MinPeople;
+    public int MaxPatrons, MinPatrons;
     public List<PatronData> Patrons = new List<PatronData>();
 
     //Heat like the Feds
     public int EnergyHeat; 
     public int PatronHeat;
-    public int MaxHeat = 15;
+    public int MaxHeat = 30;
     
     //begin function prototypes
     public UnityEvent OnGameOver;
@@ -37,16 +37,20 @@ public class Bar : MonoBehaviour
             EnergyHeat += 1;
         else
             EnergyHeat -= Math.Max(0, EnergyHeat - 1);
+        
+        if (EnergyHeat >= MaxHeat) {
+            GameOver();
+        }
     }
 
     private void CheckPatronHeat() {
-        if (Energy > MaxEnergy || Energy < MinEnergy)
-            EnergyHeat += 1;
+        if (Patrons.Count > MaxPatrons || Patrons.Count < MinPatrons)
+            PatronHeat += 1;
         else
-            EnergyHeat -= Math.Max(0, EnergyHeat - 1);
+            PatronHeat -= Math.Max(0, EnergyHeat - 1);
 
-        if (EnergyHeat >= MaxHeat) {
-            
+        if (PatronHeat >= MaxHeat) {
+            GameOver();
         }
     }
 
@@ -61,7 +65,7 @@ public class Bar : MonoBehaviour
     public void Enter(PatronData p) {
         Patrons.Add(p);
         p.barRef = this;
-        OnTick.AddListener(p.patron.Tick);
+        OnTick.AddListener(p.Tick);
 
         float chaosThresh = 1 - ((float)(Energy + p.energy) / (float)MaxEnergy);
         if (p.chaos > chaosThresh) {
@@ -74,7 +78,7 @@ public class Bar : MonoBehaviour
     public void Exit(PatronData p) {
         Patrons.Remove(p);
         p.barRef = null;
-        OnTick.RemoveListener(p.patron.Tick);
+        OnTick.RemoveListener(p.Tick);
         
         float chaosThresh = 1 - ((float)(Energy + p.energy) / (float)MaxEnergy);
         if (p.chaos > chaosThresh) {

@@ -13,13 +13,8 @@ public class Patron : MonoBehaviour
     public CharacterAnimator CharacterAnimator;
     public float patienceRemaining;
     public Action OnLeave;
-
+    
     public void Tick() {
-        PatronData.duration -= 1;
-        OnLeave += Leave;
-    }
-
-    public void LineTick() {
         patienceRemaining -= 1;
         if (patienceRemaining <= 0) {
             OnLeave.Invoke();
@@ -52,7 +47,6 @@ public class Patron : MonoBehaviour
     }
 
     public void Init() {
-        patienceRemaining = PatronData.patience;
         foreach (var sr in this.GetComponentsInChildren<SpriteRenderer>())
         {
             sr.sortingLayerName = "Character";
@@ -84,5 +78,7 @@ public class Patron : MonoBehaviour
         CharacterAnimator = this.gameObject.AddComponent<CharacterAnimator>();
         CharacterAnimator.data = PatronData.characterAnimatorData;
         CharacterAnimator.MoveToWaitPosition();
+        OnLeave += Leave;
+        patienceRemaining = PatronData.waitTime;
     }
 }

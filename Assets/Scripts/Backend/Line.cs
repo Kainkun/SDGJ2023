@@ -41,7 +41,7 @@ public class Line : MonoBehaviour
 
         PatronDatas.RemoveFirst();
         p.patron.CharacterAnimator.MoveToEnter();
-        OnTick -= p.patron.LineTick;
+        OnTick -= p.patron.Tick;
         BarRef.Enter(p);
         PatronDatas.RemoveFirst();
         AddPatronData();
@@ -62,7 +62,7 @@ public class Line : MonoBehaviour
         p.patron.CharacterAnimator.MoveToLeave();
         p = PatronDatas.First.Value;
         PatronDatas.RemoveFirst();
-        OnTick -= p.patron.LineTick;
+        OnTick -= p.patron.Tick;
 
         if (Random.Range(0, 1) > 0.25f) { // Will they try going back into line?
             PatronData.RandomizePatronData(ref p,
@@ -106,7 +106,7 @@ public class Line : MonoBehaviour
             return;
         PatronDatas.First.Value.CreatePatron();
         PatronDatas.First.Value.patron.OnLeave += Reject; //If they decide to leave, just reject yourself
-        OnTick += PatronDatas.First.Value.patron.LineTick;
+        OnTick += PatronDatas.First.Value.patron.Tick;
         
     }
     

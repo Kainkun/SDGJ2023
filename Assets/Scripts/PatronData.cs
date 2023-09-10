@@ -18,6 +18,7 @@ public class PatronData : ScriptableObject
     public int age;
     
     public float patience;
+    public float waitTime;
     public float chaos;
     public int energy;
     public int duration;
@@ -37,10 +38,10 @@ public class PatronData : ScriptableObject
         d.patience = Random.Range(0, 1);
         d.chaos = Random.Range(0, 1);
         d.energy = Random.Range(1, 10);
-        d.duration = Random.Range(5, 10);
+        d.waitTime = Random.Range(3, 5) * 2;
+        d.duration = Random.Range(15, 30) * 2; //Seconds
         return d;
     }
-
     
     public static PatronData GeneratePatronData(CharacterSpriteData sprite, CharacterAnimatorData anim) {
         PatronData d = ScriptableObject.CreateInstance<PatronData>();
@@ -50,6 +51,7 @@ public class PatronData : ScriptableObject
 
     public Patron CreatePatron() {
         GameObject patronObject = GameObject.Instantiate(characterSpriteData.psb);
+        if(name != null) patronObject.transform.name = name;
         patronObject.transform.localScale = Vector2.one * 0.1f;
         patron = patronObject.AddComponent<Patron>();
         patron.PatronData = this;
@@ -59,5 +61,9 @@ public class PatronData : ScriptableObject
 
     public void DestroyPatron() {
         Destroy(patron);
+    }
+    
+    public void Tick() {
+        duration -= 1;
     }
 }
