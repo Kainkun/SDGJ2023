@@ -122,6 +122,7 @@
 		<relationship name="effects">
 			<destination>{6f8da048-bf64-4a49-a0a4-d4805dbe6f6a}</destination>
 			<destination>{cabd1376-ab08-4820-a6e0-ba201f17a68b}</destination>
+			<destination>{0c1d304c-a86c-45e1-9dfe-9684cdd6a727}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{f576682b-8d60-40e5-a332-a1c0843cac6b}" />
@@ -166,6 +167,20 @@
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{cabd1376-ab08-4820-a6e0-ba201f17a68b}" />
+	<object class="SFXReverbEffect" id="{0c1d304c-a86c-45e1-9dfe-9684cdd6a727}">
+		<property name="decayTime">
+			<value>2200</value>
+		</property>
+		<property name="lowShelfFrequency">
+			<value>920</value>
+		</property>
+		<property name="highCut">
+			<value>3400</value>
+		</property>
+		<property name="wetLevel">
+			<value>-31</value>
+		</property>
+	</object>
 	<object class="RandomizerModulator" id="{7fad7941-c924-43ec-bbb4-5f21829000f3}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>pitch</value>
