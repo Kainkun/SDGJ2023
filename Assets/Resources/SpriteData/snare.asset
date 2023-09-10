@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 807069cd108877148bf0206e9615ef4d, type: 3}
-  m_Name: CH01_ArcticCube
+  m_Name: snare
   m_EditorClassIdentifier: 
   b1:
     serializedVersion: 2
-    key0: {r: 0.9433962, g: 0.93890613, b: 0.86032987, a: 1}
-    key1: {r: 0.45523316, g: 0.846994, b: 0.9339623, a: 1}
-    key2: {r: 0.44234657, g: 0.41740823, b: 0.990566, a: 0}
-    key3: {r: 0.35706288, g: 0.25839558, b: 0.6132076, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
+    key1: {r: 0.58552575, g: 0.7735849, b: 0.18731451, a: 1}
+    key2: {r: 0.12220241, g: 0.3584906, b: 0.06313039, a: 0}
+    key3: {r: 0.19645181, g: 0.8113208, b: 0.5604796, a: 0}
+    key4: {r: 0.60784316, g: 0.16470587, b: 0.19277152, a: 0}
+    key5: {r: 0.60784316, g: 0.16470587, b: 0.46609685, a: 0}
+    key6: {r: 0.24570812, g: 0.16470587, b: 0.60784316, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
     ctime1: 10794
-    ctime2: 34695
-    ctime3: 65535
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
+    ctime2: 27756
+    ctime3: 51657
+    ctime4: 51850
+    ctime5: 58596
+    ctime6: 65535
     ctime7: 0
     atime0: 0
     atime1: 65535
@@ -39,25 +39,25 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 4
+    m_NumColorKeys: 7
     m_NumAlphaKeys: 2
   b2:
     serializedVersion: 2
-    key0: {r: 1, g: 0.990709, b: 0.5911949, a: 1}
-    key1: {r: 1, g: 0.7293656, b: 0.31760997, a: 1}
-    key2: {r: 1, g: 0.489148, b: 0.27987415, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
+    key1: {r: 0.58552575, g: 0.7735849, b: 0.18731451, a: 1}
+    key2: {r: 0.12220241, g: 0.3584906, b: 0.06313039, a: 0}
+    key3: {r: 0.19645181, g: 0.8113208, b: 0.5604796, a: 0}
+    key4: {r: 0.60784316, g: 0.16470587, b: 0.19277152, a: 0}
+    key5: {r: 0.60784316, g: 0.16470587, b: 0.46609685, a: 0}
+    key6: {r: 0.24570812, g: 0.16470587, b: 0.60784316, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 32768
-    ctime2: 65535
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
+    ctime1: 10794
+    ctime2: 27756
+    ctime3: 51657
+    ctime4: 51850
+    ctime5: 58596
+    ctime6: 65535
     ctime7: 0
     atime0: 0
     atime1: 65535
@@ -68,7 +68,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_NumColorKeys: 3
+    m_NumColorKeys: 7
     m_NumAlphaKeys: 2
   b3:
     serializedVersion: 2
