@@ -21,10 +21,13 @@ public class Patron : MonoBehaviour
         }
     }
 
-    public void Leave() {
+    public void Leave()
+    {
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
         foreach (var sr in this.GetComponentsInChildren<SpriteRenderer>()){
             sr.sortingLayerName = "CharacterLeave";
-            sr.flipX = true;
         }
     }
 
