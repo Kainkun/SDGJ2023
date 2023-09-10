@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using EasyButtons;
 using FMODUnity;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Dialogue : MonoBehaviour
@@ -20,9 +19,10 @@ public class Dialogue : MonoBehaviour
 
     public void SetPatronData(PatronData patronData)
     {
-        SetDialogue(patronData.discussion[0]);
+        if (patronData.discussion is { Length: > 0 })
+            SetDialogue(patronData.discussion[0]);
     }
-    
+
     [Button]
     public void SetDialogue(string dialogue)
     {
@@ -41,7 +41,7 @@ public class Dialogue : MonoBehaviour
             text.maxVisibleCharacters = currentCharacters;
             yield return new WaitForSeconds(0.05f);
         }
-        audio.Stop();
 
+        audio.Stop();
     }
 }
