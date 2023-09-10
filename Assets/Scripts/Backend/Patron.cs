@@ -23,7 +23,8 @@ public class Patron : MonoBehaviour
 
     public void Leave() {
         foreach (var sr in this.GetComponentsInChildren<SpriteRenderer>()){
-            sr.sortingLayerName = "Character";
+            sr.sortingLayerName = "CharacterLeave";
+            sr.flipX = true;
         }
     }
 
