@@ -48,9 +48,11 @@ public class MusicBeatSystem : MonoBehaviour
         studioEventEmitter = GetComponent<StudioEventEmitter>();
     }
 
-    private void Start()
+    IEnumerator Start()
     {
         beatInterval = 60f / 118f;
+        yield return new WaitForSeconds(1f);
+        StartMusic();
     }
 
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
