@@ -12,7 +12,8 @@ public class MusicBeatSystem : MonoBehaviour
 
     public float globalOffset = 0;
 
-    private StudioEventEmitter studioEventEmitter;
+    public StudioEventEmitter music;
+    public StudioEventEmitter crowd;
 
     private bool musicGoing = false;
 
@@ -46,7 +47,7 @@ public class MusicBeatSystem : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        studioEventEmitter = GetComponent<StudioEventEmitter>();
+        music = GetComponent<StudioEventEmitter>();
     }
 
     IEnumerator Start()
@@ -61,7 +62,8 @@ public class MusicBeatSystem : MonoBehaviour
     {
         musicGoing = true;
         startTime = Time.time;
-        studioEventEmitter.Play();
+        music.Play();
+        crowd.Play();
     }
 
     public static float Remap(float iMin, float iMax, float oMin, float oMax, float v)
@@ -72,9 +74,9 @@ public class MusicBeatSystem : MonoBehaviour
 
     private void Update()
     {
-        float e = Remap(bar.MinEnergy, bar.MaxEnergy, 0f, 1.5f, bar.Energy);
-        float h = Remap(0, bar.MaxHeat, 0f, 0.5f, bar.EnergyHeat);
-        studioEventEmitter.SetParameter("Energy", e + h);
+        float e = Remap(bar.MinEnergy, bar.MaxEnergy, 0f, 2f, bar.Energy);
+        float h = Remap(0, bar.MaxHeat, 0f, 2f, bar.EnergyHeat);
+        music.SetParameter("Energy", e);
         
         foreach (BeatAction onBeatAction in OnBeatActions)
         {
@@ -99,10 +101,10 @@ public class MusicBeatSystem : MonoBehaviour
         while (t < 2)
         {
             t += Time.deltaTime * 0.2f;
-            studioEventEmitter.SetParameter("Stop The Party", t);
+            music.SetParameter("Stop The Party", t);
             yield return null;
         }
 
-        studioEventEmitter.SetParameter("Stop The Party", 2f);
+        music.SetParameter("Stop The Party", 2f);
     }
 }
