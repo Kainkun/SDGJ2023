@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class CharacterAnimator : MonoBehaviour
 {
-    private float distanceToWaitPosition = 2;
+    private float distanceToWaitPosition = 5;
     private float distanceToEnterPosition = 4.5f;
-    private Vector2 waitPosition = new Vector2(-1.5f, -1.93f);
+    private Vector2 waitPosition = new Vector2(-0.4f, -2.2f);
     private float velocity;
 
     private float stepDistance;
