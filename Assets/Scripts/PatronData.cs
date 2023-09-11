@@ -112,7 +112,7 @@ public class PatronData : ScriptableObject{
             d.discussion = Dialogue.goodDialogues[Random.Range(0, Dialogue.goodDialogues.Length)];
         }
         d.waitTime = Random.Range(8, 15) * 2;
-        d.duration = Random.Range(40, 80) * 2; //Seconds
+        d.duration = Random.Range(15, 30) * 2; //Seconds
         d.age = Random.Range(16, 40);
         return d;
     }
