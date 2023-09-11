@@ -30,8 +30,6 @@ public class CharacterAnimator : MonoBehaviour
         SetQueue(MoveTo(this.transform.position, new Vector2(spawnPosition.position.x, spawnPosition.position.y), null));
         OnArrival += () => Destroy(this.gameObject);
     }
-
-    
     
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
     public void MoveToEnter() => SetQueue(MoveTo(this.transform.position, new Vector2(enterClubPosition.position.x, enterClubPosition.position.y), null));

@@ -43,10 +43,8 @@ public class Line : MonoBehaviour
         PatronData p = PatronDatas.First.Value;
         if (p == null) return;
 
-        PatronDatas.RemoveFirst();
         p.patron.CharacterAnimator.MoveToEnter();
         OnTick -= p.patron.Tick;
-        p.patron.CharacterAnimator.OnArrival -= Interact;
         BarRef.Enter(p);
         p.patron.CharacterAnimator.OnArrival += () => { p.patron.SetSortingLayer("CharacterClub", Random.Range(0, 10) * 10); };
 
@@ -75,6 +73,7 @@ public class Line : MonoBehaviour
         p.patron.SetSortingLayer("CharacterLeave", Random.Range(0, 10) * 10);
         PatronDatas.RemoveFirst();
         OnTick -= p.patron.Tick;
+
         p.patron.CharacterAnimator.OnArrival -= Interact;
         OnLeaveLine.Invoke(p);
 
@@ -111,7 +110,7 @@ public class Line : MonoBehaviour
                 continue;
             }
 
-            PatronDatas.AddLast(PatronData.GeneratePatronData());
+            AddPatronData();
         }
     }
     

@@ -78,6 +78,8 @@ public class PatronData : ScriptableObject{
     public int energy;
     public int duration;
 
+    public int lineSpot;
+
     public Action<int> lineSpotChange;
 
     public bool glasses;
@@ -94,6 +96,8 @@ public class PatronData : ScriptableObject{
         d.body[2] = d.characterSpriteData.b3.Evaluate(d.body_gradient[2] = Random.Range(0, 1f));
         if(discussions != null) d.discussion = discussions[Random.Range(0, discussions.Length)];
         if(names != null) d.name = names[Random.Range(0, names.Length)];
+
+        if (string.IsNullOrEmpty(d.name)) d.name = "Awooga Jones";
         for(int i = 0; i < 3; i++)
             d.clothing[i] = Random.ColorHSV(0f, 1f, 0.2f, 0.8f, 0.2f, 0.9f);
         d.patience = Random.Range(0, 1f);

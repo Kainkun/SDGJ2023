@@ -13,12 +13,11 @@ public class Patron : MonoBehaviour
     public CharacterAnimator CharacterAnimator;
     public float patienceRemaining;
     public Action OnLeave;
-    public int linePosition = 1;
 
     public List<int> sortingOrder = new List<int>();
     
     public void Tick(){
-        if (linePosition != 0)
+        if (PatronData.lineSpot != 0)
             return;
 
             patienceRemaining -= 1;
@@ -28,9 +27,9 @@ public class Patron : MonoBehaviour
     }
 
     public void OnLinePositionChange(int position){
-        linePosition = position;
+        PatronData.lineSpot = position;
         CharacterAnimator.MoveToLinePosition(position);
-        SetSortingLayer("Character", linePosition * 10);
+        SetSortingLayer("Character", PatronData.lineSpot * 10);
     }
 
     public void SetSortingLayer(string s, int offset){
@@ -83,6 +82,6 @@ public class Patron : MonoBehaviour
         PatronData.lineSpotChange += OnLinePositionChange;
         patienceRemaining = PatronData.waitTime;
 
-        SetSortingLayer("Character", linePosition * 10);
+        SetSortingLayer("Character", PatronData.lineSpot * 10);
     }
 }
