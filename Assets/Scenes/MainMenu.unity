@@ -882,7 +882,7 @@ MonoBehaviour:
     crazy, theres TOO MUCH HYPE. Chill out the party by letting less patrons in.\nIf
     the music gets funky, theres too little hype so invite more patrons!\n\nDont
     forget to use your froggy-counter\u2122 to keep track of how many patrons are
-    partying, dont go over the MAX CAPACITY!"
+    partying, dont go over the MAX CAPACITY! (20 Patrons)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
