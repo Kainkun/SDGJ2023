@@ -20,10 +20,13 @@ public class Line : MonoBehaviour
     public void Start() {
         MusicBeatSystem.Instance.OnBeatActions.Add(new MusicBeatSystem.BeatAction(Tick, 0));
         GenerateLine(100);
-        GenerateLineGraphics();
+        GenerateLineGraphics(4);
         BarRef.OnGameOver.AddListener(OnGameOver);
-        
+
         var node = PatronDatas.First;
+        
+        node.Value.patron.CharacterAnimator.OnArrival += Interact;
+        
         for (int i = 0; node.Next != null; i++){
             if(node.Value.lineSpotChange != null)
             node.Value.lineSpotChange(i);
@@ -45,7 +48,7 @@ public class Line : MonoBehaviour
         OnTick -= p.patron.Tick;
         p.patron.CharacterAnimator.OnArrival -= Interact;
         BarRef.Enter(p);
-        p.patron.CharacterAnimator.OnArrival += () => { p.patron.SetSortingLayer("CharacterClub", 0); };
+        p.patron.CharacterAnimator.OnArrival += () => { p.patron.SetSortingLayer("CharacterClub", Random.Range(0, 10) * 10); };
 
         OnLeaveLine.Invoke(p);
         PatronDatas.RemoveFirst();
@@ -69,7 +72,7 @@ public class Line : MonoBehaviour
         if (p == null) return;
         p.patron.CharacterAnimator.MoveToLeave();
         p = PatronDatas.First.Value;
-        p.patron.SetSortingLayer("CharacterLeave", 0);
+        p.patron.SetSortingLayer("CharacterLeave", Random.Range(0, 10) * 10);
         PatronDatas.RemoveFirst();
         OnTick -= p.patron.Tick;
         p.patron.CharacterAnimator.OnArrival -= Interact;
@@ -112,8 +115,8 @@ public class Line : MonoBehaviour
         }
     }
     
-    public void GenerateLineGraphics() {
-        for(int i = 0; i < 10; i++)
+    public void GenerateLineGraphics(int size) {
+        for(int i = 0; i < size; i++)
             CreatePatron();
     }
 
