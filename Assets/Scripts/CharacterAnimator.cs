@@ -11,6 +11,8 @@ public class CharacterAnimator : MonoBehaviour
     public Transform lineFront;
     public Transform spawnPosition;
     public Transform enterClubPosition;
+    public Transform exitClubStartPosition;
+    public Transform exitClubExitPosition;
 
     public CharacterAnimatorData data;
     
@@ -32,7 +34,12 @@ public class CharacterAnimator : MonoBehaviour
     
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
     public void MoveToEnter() => SetQueue(MoveTo(this.transform.position, new Vector2(enterClubPosition.position.x, enterClubPosition.position.y)));
-    
+
+    public void LeaveFromClub(){
+        
+        SetQueue(MoveTo(exitClubStartPosition.position, exitClubExitPosition.position));
+    }
+
     void Awake(){
         lineFront = GameObject.Find("LineFront").transform;
         spawnPosition = GameObject.Find("Spawn").transform;

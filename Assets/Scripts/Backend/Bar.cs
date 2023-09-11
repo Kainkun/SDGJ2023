@@ -91,6 +91,7 @@ public class Bar : MonoBehaviour
         Patrons.Remove(p);
         p.barRef = null;
         OnTick.RemoveListener(p.Tick);
+        p.patron.CharacterAnimator.LeaveFromClub();
         
         float chaosThresh = 1 - ((float)(Energy + p.energy) / (float)MaxEnergy);
         if (p.chaos > chaosThresh) {

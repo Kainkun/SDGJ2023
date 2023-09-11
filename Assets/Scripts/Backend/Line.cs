@@ -43,6 +43,7 @@ public class Line : MonoBehaviour
         PatronDatas.RemoveFirst();
         p.patron.CharacterAnimator.MoveToEnter();
         OnTick -= p.patron.Tick;
+        p.patron.CharacterAnimator.OnArrival -= Interact;
         BarRef.Enter(p);
         p.patron.CharacterAnimator.OnArrival += () => { p.patron.SetSortingLayer("CharacterClub", 0); };
 
@@ -52,6 +53,9 @@ public class Line : MonoBehaviour
         CreatePatron();
 
         var node = PatronDatas.First;
+        
+        node.Value.patron.CharacterAnimator.OnArrival += Interact;
+
         for (int i = 0; node.Next != null; i++){
             if(node.Value.lineSpotChange != null)
                 node.Value.lineSpotChange(i);
@@ -79,6 +83,8 @@ public class Line : MonoBehaviour
         CreatePatron();
 
         var node = PatronDatas.First;
+        
+        node.Value.patron.CharacterAnimator.OnArrival += Interact;
         for (int i = 0; node.Next != null; i++){
             if(node.Value.lineSpotChange != null)
                 node.Value.lineSpotChange(i);
