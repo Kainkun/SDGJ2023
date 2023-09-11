@@ -213,16 +213,18 @@ public class Dialogue : MonoBehaviour
     [Button]
     public void SetDialogue(string dialogue)
     {
-        StartCoroutine(CR_SetDialogue(dialogue));
+        if (currentCoroutine != null)
+            StopCoroutine(currentCoroutine);
+        currentCoroutine = StartCoroutine(CR_SetDialogue(dialogue));
     }
+
+    Coroutine currentCoroutine;
 
     IEnumerator CR_SetDialogue(string dialogue)
     {
         Color c = Random.ColorHSV(0f, 1f, 0.5f, 0.7f, 1f, 1f);
         string cs = c.ToHexString();
-        print(cs);
         cs = cs.Substring(0, cs.Length - 2);
-        print(cs);
         dialogue = dialogue.Replace("HEX_COLOR", cs);
         text.SetText(dialogue);
         int totalCharacters = dialogue.Length;
