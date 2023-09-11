@@ -3154,9 +3154,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Energy: 0
   MaxEnergy: 200
-  MinEnergy: 15
-  MaxPatrons: 20
-  MinPatrons: 2
+  MinEnergy: 30
+  MaxPatrons: 40
+  MinPatrons: 15
   Patrons:
   - {fileID: 11400000, guid: 1347a6ab1685eb9469b3a03178efea60, type: 2}
   EnergyHeat: 0
