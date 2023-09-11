@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class Bar : MonoBehaviour
 {
@@ -92,6 +93,8 @@ public class Bar : MonoBehaviour
         p.barRef = null;
         OnTick.RemoveListener(p.Tick);
         p.patron.CharacterAnimator.LeaveFromClub();
+        p.patron.SetSortingLayer("CharacterLeave", 10 * Random.Range(0, 100));
+
         
         float chaosThresh = 1 - ((float)(Energy + p.energy) / (float)MaxEnergy);
         if (p.chaos > chaosThresh) {
