@@ -99,6 +99,14 @@ public class PatronData : ScriptableObject{
         d.patience = Random.Range(0, 1f);
         d.chaos = Random.Range(0, 1f);
         d.energy = Random.Range(1, 10);
+        if (d.energy >= 7)
+        {
+            d.discussion = Dialogue.badDialogues[Random.Range(0, Dialogue.badDialogues.Length)];
+        }
+        else
+        {
+            d.discussion = Dialogue.goodDialogues[Random.Range(0, Dialogue.goodDialogues.Length)];
+        }
         d.waitTime = Random.Range(8, 15) * 2;
         d.duration = Random.Range(40, 80) * 2; //Seconds
         d.age = Random.Range(16, 40);
