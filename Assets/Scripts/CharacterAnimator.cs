@@ -14,7 +14,7 @@ public class CharacterAnimator : MonoBehaviour
 
     public CharacterAnimatorData data;
     
-    public UnityEvent OnArrival;
+    public Action OnArrival;
     public Action onDisappear;
 
     public Vector3 initialScale;
@@ -23,7 +23,12 @@ public class CharacterAnimator : MonoBehaviour
     public void MoveToWaitPosition() => SetQueue(MoveTo(this.transform.position, new Vector2(lineFront.position.x, lineFront.position.y)));
 
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
-    public void MoveToLeave() => SetQueue(MoveTo(this.transform.position, new Vector2(spawnPosition.position.x, spawnPosition.position.y)));
+    public void MoveToLeave(){
+        SetQueue(MoveTo(this.transform.position, new Vector2(spawnPosition.position.x, spawnPosition.position.y)));
+        OnArrival += () => Destroy(this.gameObject);
+    }
+
+    
     
     [Button(Mode = ButtonMode.EnabledInPlayMode)]
     public void MoveToEnter() => SetQueue(MoveTo(this.transform.position, new Vector2(enterClubPosition.position.x, enterClubPosition.position.y)));
@@ -35,7 +40,11 @@ public class CharacterAnimator : MonoBehaviour
         this.transform.position = spawnPosition.position;
         initialScale = this.transform.localScale;
     }
-    
+    public void MoveToLinePosition(int i = 0){
+        float dist = lineFront.position.x - spawnPosition.position.x;
+        float patronWidth = 1;
+        SetQueue(MoveTo(this.transform.position, new Vector2(lineFront.position.x - (i * patronWidth) , lineFront.position.y)));
+    }
 
     public float stepDistance, stepsRemaining, t, loop;
 

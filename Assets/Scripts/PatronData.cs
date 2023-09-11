@@ -30,7 +30,7 @@ public class PatronData : ScriptableObject{
                 TextAsset asset = Resources.Load<TextAsset>("Names");
                 if (asset == null)
                     return _names;
-                _names = asset.text.Split("\r\n");
+                _names = asset.text.Split("\n");
             }
             return _names;
         }
@@ -77,6 +77,8 @@ public class PatronData : ScriptableObject{
     public float chaos;
     public int energy;
     public int duration;
+
+    public Action<int> lineSpotChange;
 
     public bool glasses;
     public Vector3 glassesPosition;

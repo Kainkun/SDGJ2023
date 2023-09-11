@@ -20,8 +20,15 @@ public class Line : MonoBehaviour
     public void Start() {
         MusicBeatSystem.Instance.OnBeatActions.Add(new MusicBeatSystem.BeatAction(Tick, 0));
         GenerateLine(100);
-        CreatePatron();
+        GenerateLineGraphics();
         BarRef.OnGameOver.AddListener(OnGameOver);
+        
+        var node = PatronDatas.First;
+        for (int i = 0; node.Next != null; i++){
+            if(node.Value.lineSpotChange != null)
+            node.Value.lineSpotChange(i);
+            node = node.Next;
+        }
     }
 
     public void Tick(){
@@ -37,15 +44,19 @@ public class Line : MonoBehaviour
         p.patron.CharacterAnimator.MoveToEnter();
         OnTick -= p.patron.Tick;
         BarRef.Enter(p);
-        
+        p.patron.CharacterAnimator.OnArrival += () => { p.patron.SetSortingLayer("CharacterClub", 0); };
+
         OnLeaveLine.Invoke(p);
         PatronDatas.RemoveFirst();
         AddPatronData();
-        if (PatronDatas.First.Value == null) return;
-        if(PatronDatas.First.Value.patron == null)
-            CreatePatron();
-        
-        PatronDatas.First.Value.patron.CharacterAnimator.MoveToWaitPosition();
+        CreatePatron();
+
+        var node = PatronDatas.First;
+        for (int i = 0; node.Next != null; i++){
+            if(node.Value.lineSpotChange != null)
+                node.Value.lineSpotChange(i);
+            node = node.Next;
+        }
     }
     
     [Button]
@@ -54,8 +65,10 @@ public class Line : MonoBehaviour
         if (p == null) return;
         p.patron.CharacterAnimator.MoveToLeave();
         p = PatronDatas.First.Value;
+        p.patron.SetSortingLayer("CharacterLeave", 0);
         PatronDatas.RemoveFirst();
         OnTick -= p.patron.Tick;
+        p.patron.CharacterAnimator.OnArrival -= Interact;
         OnLeaveLine.Invoke(p);
 
         if (Random.Range(0f, 1f) > 0.25f) { // Will they try going back into line?
@@ -63,11 +76,14 @@ public class Line : MonoBehaviour
         }
         
         PatronDatas.AddLast(p);
-        if (PatronDatas.First.Value == null) return;
-        if(PatronDatas.First.Value.patron == null)
-            CreatePatron();
-        
-        PatronDatas.First.Value.patron.CharacterAnimator.MoveToWaitPosition();
+        CreatePatron();
+
+        var node = PatronDatas.First;
+        for (int i = 0; node.Next != null; i++){
+            if(node.Value.lineSpotChange != null)
+                node.Value.lineSpotChange(i);
+            node = node.Next;
+        }
     }
 
     [Button]
@@ -79,32 +95,39 @@ public class Line : MonoBehaviour
 
     public void GenerateLine(int size, bool useBaked = true, float probability = 0.1f) {
         for (int i = 0; i < size; i++) {
-            if (useBaked && Random.Range(0f, 1f) > probability && BakedPatrons.Count > 0) {
-                PatronDatas.AddLast(BakedPatrons[Random.Range(0, BakedPatrons.Count)]);
+            if (useBaked && Random.Range(0f, 1f) > probability && BakedPatrons.Count > 0){
+                int index = Random.Range(0, BakedPatrons.Count);
+                PatronDatas.AddLast(BakedPatrons[index]);
+                BakedPatrons.RemoveAt(index);
                 continue;
             }
 
             PatronDatas.AddLast(PatronData.GeneratePatronData());
         }
     }
+    
+    public void GenerateLineGraphics() {
+        for(int i = 0; i < 10; i++)
+            CreatePatron();
+    }
 
     public void OnGameOver(){
         foreach (var patron in PatronDatas){
             if(patron.patron != null)
                 patron.patron.CharacterAnimator.MoveToLeave();
-
-            
         }
     }
 
     [Button]
     public void CreatePatron() {
-        if (PatronDatas.First.Value == null)
-            return;
-        PatronDatas.First.Value.CreatePatron();
-        PatronDatas.First.Value.patron.OnLeave += Reject; //If they decide to leave, just reject yourself
-        OnTick += PatronDatas.First.Value.patron.Tick;
-        
+        for (var node = PatronDatas.First; node != null; node = node.Next){
+            if (node.Value.patron != null)
+                continue;
+            node.Value.CreatePatron();
+            node.Value.patron.OnLeave += Reject; //If they decide to leave, just reject yourself
+            OnTick += node.Value.patron.Tick;
+            break;
+        }
     }
     
     public void AddPatronData(){

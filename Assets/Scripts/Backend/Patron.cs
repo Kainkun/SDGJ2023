@@ -13,21 +13,42 @@ public class Patron : MonoBehaviour
     public CharacterAnimator CharacterAnimator;
     public float patienceRemaining;
     public Action OnLeave;
+    public int linePosition = 1;
+
+    public List<int> sortingOrder = new List<int>();
     
-    public void Tick() {
-        patienceRemaining -= 1;
+    public void Tick(){
+        if (linePosition != 0)
+            return;
+
+            patienceRemaining -= 1;
         if (patienceRemaining <= 0) {
             OnLeave.Invoke();
         }
     }
 
-    public void Leave(){
-        
+    public void OnLinePositionChange(int position){
+        linePosition = position;
+        CharacterAnimator.MoveToLinePosition(position);
+        SetSortingLayer("Character", linePosition * 10);
     }
 
-    public void Init() {
-        foreach (var sr in this.GetComponentsInChildren<SpriteRenderer>())
-        {
+    public void SetSortingLayer(string s, int offset){
+        int i = 0;
+        foreach (var sr in this.GetComponentsInChildren<SpriteRenderer>()){
+            sr.sortingLayerName = s;
+            sr.sortingOrder = sortingOrder[i] + offset;
+            i++;
+        }
+    }
+
+    public void OnDestroy(){
+        PatronData.lineSpotChange -= OnLinePositionChange;
+    }
+
+    public void Init(){
+        foreach (var sr in this.GetComponentsInChildren<SpriteRenderer>()){
+            sortingOrder.Add(sr.sortingOrder); 
             sr.sortingLayerName = "Character";
             char[] name = sr.name.ToCharArray();
             if (name.Length > 2)
@@ -59,8 +80,9 @@ public class Patron : MonoBehaviour
 
         CharacterAnimator = this.gameObject.AddComponent<CharacterAnimator>();
         CharacterAnimator.data = PatronData.characterAnimatorData;
-        CharacterAnimator.MoveToWaitPosition();
-        OnLeave += Leave;
+        PatronData.lineSpotChange += OnLinePositionChange;
         patienceRemaining = PatronData.waitTime;
+
+        SetSortingLayer("Character", linePosition * 10);
     }
 }
